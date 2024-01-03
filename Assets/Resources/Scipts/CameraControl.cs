@@ -3,13 +3,20 @@ using UnityEngine.InputSystem;
 
 public class CameraControl : MonoBehaviour
 {
+    public bool freeCam = false;
+
+    public Transform targetObject;
+
+    // Freecam
     public float Speed = 8.0f;
     public Vector3 move;
 
-    public bool freeCam = true;
     public Vector2 look;
     float yaw = 0.0f;
     float pitch = 0.0f;
+
+    // Locked
+    public float rotationSpeed = 5.0f;
 
     #region Inputs
     void OnMove(InputValue value) { move = value.Get<Vector3>(); }
@@ -20,8 +27,26 @@ public class CameraControl : MonoBehaviour
     {
         var step = Speed * Time.deltaTime; // calculate distance to move
         Vector3 relativeMovement = transform.rotation * move;
-        if (freeCam)
-            transform.position += relativeMovement * step;
+        if (freeCam) { transform.position += relativeMovement * step; }
+        else 
+        {
+
+            transform.RotateAround(targetObject.transform.position, Vector3.up, 45 * move.x * Time.deltaTime);
+        }
+
+
+        // Calculate the direction vector from the camera to the target object
+        Vector3 directionToTarget = targetObject.position - transform.position;
+
+        // Determine the target rotation based on the direction to the target
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+
+        // Smoothly interpolate between the current rotation and the target rotation
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.LookRotation(directionToTarget);
+
+
 
         if (Input.GetMouseButton(1))
         {
@@ -31,7 +56,6 @@ public class CameraControl : MonoBehaviour
             pitch -= look.y * sensitivity;
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-
         }
     }
 }
