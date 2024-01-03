@@ -12,15 +12,8 @@ public class CameraControl : MonoBehaviour
     float pitch = 0.0f;
 
     #region Inputs
-    void OnMove(InputValue value)
-    {
-        move = value.Get<Vector3>();
-    }
-
-    void OnLook(InputValue value)
-    {
-        look = value.Get<Vector2>();
-    }
+    void OnMove(InputValue value) { move = value.Get<Vector3>(); }
+    void OnLook(InputValue value) { look = value.Get<Vector2>(); }
     #endregion Inputs
 
     private void Update()
