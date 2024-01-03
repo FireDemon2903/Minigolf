@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 
 public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 {
     public GameObject pauseMenuen;
-    public bool is_paused = false;
+    public TextMeshProUGUI titleText;
+    [SerializeField] public bool is_paused = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +33,21 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         is_paused = false;
         Time.timeScale = 1;
         pauseMenuen.SetActive(is_paused);
+    }
+
+    public void vicMenu()
+    {
+        int dims = SceneManager.GetActiveScene().buildIndex;
+        titleText.text = $"Hole {dims} Done";
+    }
+
+    public void nextHole()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
