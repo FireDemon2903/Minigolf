@@ -8,6 +8,7 @@ using UnityEngine;
 public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 {
     public GameObject pauseMenuen;
+    public GameObject vicMenuen;
     public TextMeshProUGUI titleText;
     [SerializeField] public bool is_paused = false;
     // Start is called before the first frame update
@@ -37,12 +38,14 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     public void vicMenu()
     {
+        vicMenuen.SetActive(true);
         int dims = SceneManager.GetActiveScene().buildIndex;
         titleText.text = $"Hole {dims} Done";
     }
 
     public void nextHole()
     {
+        vicMenuen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
