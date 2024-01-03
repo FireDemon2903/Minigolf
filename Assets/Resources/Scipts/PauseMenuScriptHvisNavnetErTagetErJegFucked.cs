@@ -38,6 +38,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     public void vicMenu()
     {
+        Time.timeScale = 0;
         vicMenuen.SetActive(true);
         int dims = SceneManager.GetActiveScene().buildIndex;
         titleText.text = $"Hole {dims} Done";
@@ -45,6 +46,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     public void nextHole()
     {
+        Time.timeScale = 1;
         vicMenuen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
