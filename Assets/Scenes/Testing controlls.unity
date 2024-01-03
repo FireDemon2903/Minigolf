@@ -442,6 +442,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f63b7a66bf90a246a0ce997812f4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 8
+  move: {x: 0, y: 0, z: 0}
+  freeCam: 1
+  look: {x: 0, y: 0}
 --- !u!1 &1796992931
 GameObject:
   m_ObjectHideFlags: 0
