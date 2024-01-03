@@ -26,6 +26,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     public void unPauseDims()
     {
+        is_paused = false;
         Time.timeScale = 1;
         pauseMenuen.SetActive(is_paused);
     }
