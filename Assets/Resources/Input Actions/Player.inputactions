@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TheScoreboardActionDims",
+                    "type": "Button",
+                    "id": "1125fa20-56b9-4ad7-9a94-adfdd8edb615",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -211,6 +220,26 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                },
+                {
+                    "name": "",
+                    "id": "0e7568e6-1461-4c57-a2c5-23e14baf891b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThePauseActionTakeingDims",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df99d26d-aeda-4d74-b259-c6cd77b2e83b",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TheScoreboardActionDims",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
