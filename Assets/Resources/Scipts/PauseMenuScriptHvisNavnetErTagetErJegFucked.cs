@@ -10,6 +10,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 {
     public GameObject pauseMenuen;
     public GameObject vicMenuen;
+    public GameObject scoreborad;
     public TextMeshProUGUI titleText;
     public bool is_paused = false;
     public int holesPassed = 0;
@@ -74,6 +75,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     #region Controls
 
+    // ESC button pressed
     void OnThePauseActionTakeingDims(InputValue value)
     {
         if (!is_paused && !mom_i_am_winning)
@@ -84,6 +86,12 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         {
             unPauseDims();
         }
+    }
+
+    // Tab button pressed and so on
+    void OnTheScoreboardActionDims(InputValue value)
+    {
+        scoreborad.SetActive(!scoreborad.active);
     }
 
     #endregion Controls
