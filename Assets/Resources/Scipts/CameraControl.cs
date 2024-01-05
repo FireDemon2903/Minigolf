@@ -37,7 +37,7 @@ public class CameraControl : MonoBehaviour
             Vector3 desiredPosition = targetObject.position + offset;
 
             // Set position and rotation
-            transform.SetPositionAndRotation(-desiredPosition, Quaternion.LookRotation(directionToTarget));
+            transform.SetPositionAndRotation(desiredPosition, Quaternion.LookRotation(directionToTarget));
         }
 
         // Toggle freecam
@@ -64,11 +64,22 @@ public class CameraControl : MonoBehaviour
         }
         else 
         {
-            // y-axis: TODO
-            //transform.RotateAround(targetObject.transform.position, );
+            // y-axis
+            transform.RotateAround(targetObject.transform.position, transform.right, 45 * move.z * Time.deltaTime);
 
-            // x-axis
+            // x-axis input
             transform.RotateAround(targetObject.transform.position, Vector3.up, 45 * move.x * Time.deltaTime);
+            // Calculate the direction vector from the target to the camera
+            Vector3 directionToCamera = transform.position - targetObject.position;
+
+            // Normalize the direction vector and multiply by the desired distance to get the offset
+            Vector3 offset = directionToCamera.normalized * camDist;
+
+            // Calculate the desired position of the camera
+            Vector3 desiredPosition = targetObject.position + offset;
+
+            // Set position and rotation
+            transform.SetPositionAndRotation(desiredPosition, Quaternion.LookRotation(-directionToCamera));
         }
 
         if (Input.GetMouseButton(1))
