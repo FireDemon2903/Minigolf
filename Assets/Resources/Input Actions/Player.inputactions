@@ -31,24 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "ba18d596-7d4f-4cde-9b8d-96af7c5b63da",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Fire2",
-                    "type": "Button",
-                    "id": "abc9f318-7b55-4438-8a43-5b5b4991d238",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -183,26 +165,52 @@
                     "action": "ToggleCam",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "BallShooting",
+            "id": "11ce0ce3-d5d8-478c-9407-0b0362d9a52e",
+            "actions": [
                 {
-                    "name": "",
-                    "id": "97fc34e2-b938-42cb-a8fb-dfb62817c906",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "81df6a5b-89a5-4e4d-b453-b764a0c6ee07",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "Fire2",
+                    "type": "Button",
+                    "id": "5d54b0db-9b2e-47cb-bccf-f283e792c125",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "56914842-59a6-4dc3-be96-ce6c8ff2d14b",
+                    "id": "532434b5-3fbe-4e34-ab41-1bd35ada0a98",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Fire2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "def8d1a5-be73-4e90-9f06-90919a898ada",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
