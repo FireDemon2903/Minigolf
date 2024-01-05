@@ -547,7 +547,6 @@ MonoBehaviour:
   holePoints: 
   ThePrefrabOfTheHolesYeah: {fileID: 5431716896833473692, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
   TheParentOfAllParents: {fileID: 471477789}
-  TheHolesInScoreboard: []
 --- !u!114 &206996303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,7 +1954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110135126
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2403,7 +2402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -333.7, y: 17.467}
+  m_AnchoredPosition: {x: -333.7, y: 17.50002}
   m_SizeDelta: {x: 85, y: 33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430783533
@@ -2619,7 +2618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -333.7, y: -19.533}
+  m_AnchoredPosition: {x: -333.7, y: -19.499996}
   m_SizeDelta: {x: 85, y: 33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613530385
@@ -3266,9 +3265,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 471477790}
     m_Modifications:
+    - target: {fileID: 5431716896001070618, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5431716896833473692, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
       propertyPath: m_Name
       value: AHoleScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431716896833473692, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5431716896833473695, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
       propertyPath: m_Pivot.x
@@ -3336,11 +3343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5431716896833473695, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -273.1
+      value: -273
       objectReference: {fileID: 0}
     - target: {fileID: 5431716896833473695, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.033
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5431716896833473695, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

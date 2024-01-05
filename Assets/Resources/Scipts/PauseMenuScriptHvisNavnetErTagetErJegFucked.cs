@@ -19,17 +19,27 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     [SerializeField] int numberOfHoles = 5;
     [SerializeField] int[] holePoints;
 
-    [SerializeField] GameObject ThePrefrabOfTheHolesYeah;
-    [SerializeField] GameObject TheParentOfAllParents;
-    [SerializeField] List<GameObject> TheHolesInScoreboard = new List<GameObject>();
+    public GameObject ThePrefrabOfTheHolesYeah;
+    public GameObject TheParentOfAllParents;
+    [SerializeField] List<List<GameObject>> TheHolesInScoreboard = new List<List<GameObject>>(); // TheHolesInScoreboard[0][0] = Hul tekst, TheHolesInScoreboard[0][1] = point tekst, TheHolesInScoreboard[0][3] objektet som holder på dem
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < numberOfHoles; i++)
         {
-            GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(TheParentOfAllParents.transform.position.x - 273 + (i * 50), TheParentOfAllParents.transform.position.y - 1, TheParentOfAllParents.transform.position.z), Quaternion.identity);
             kurt.transform.parent = TheParentOfAllParents.transform;
-            TheHolesInScoreboard.Add(kurt);
+
+            List<GameObject> children = new List<GameObject>();
+            foreach (Transform child in kurt.transform)
+            {
+                children.Add(child.gameObject);
+            }
+            children.Add(kurt);
+            TheHolesInScoreboard.Add(children);
+
+            TextMeshProUGUI peter = TheHolesInScoreboard[i][0].GetComponent<TextMeshProUGUI>();
+            peter.text = $"{i + 1}";
         }
         
     }
