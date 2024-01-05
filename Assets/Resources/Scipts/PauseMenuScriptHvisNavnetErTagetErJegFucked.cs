@@ -29,7 +29,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         for (int i = 0; i < numberOfHoles; i++)
         {
             GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(TheParentOfAllParents.transform.position.x - 273 + (i * 50), TheParentOfAllParents.transform.position.y - 1, TheParentOfAllParents.transform.position.z), Quaternion.identity);
-            kurt.transform.parent = TheParentOfAllParents.transform;
+            //kurt.transform.parent = TheParentOfAllParents.transform;
+            kurt.transform.SetParent(TheParentOfAllParents.transform);
 
             // få børneneenenen af hovedobjektet, for det skal man åbenbart have hvis man gerne vil ændre på det der tekst.
             List<GameObject> children = new List<GameObject>();
@@ -67,6 +68,9 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         Time.timeScale = 1;
         pauseMenuen.SetActive(is_paused);
     }
+
+    #region settingsMenuen
+    #endregion settingsMenuen
 
     #endregion Pausemenu
 

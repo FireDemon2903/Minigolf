@@ -33,12 +33,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TheScoreboardActionDims",
+                    "name": "ThePauseActionTakeingDims",
                     "type": "Button",
-                    "id": "1125fa20-56b9-4ad7-9a94-adfdd8edb615",
+                    "id": "be9c8241-6d24-4a71-8ad4-6104a0d98825",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TheScoreboardActionDims",
+                    "type": "Button",
+                    "id": "c94f5457-fbe2-4f3e-a02e-92690008ba32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -174,6 +183,28 @@
                     "action": "ToggleCam",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb8db8ee-fb77-4793-b4c0-69211a692a08",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThePauseActionTakeingDims",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc4b563b-a613-48bd-8167-90c8416d7a8d",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TheScoreboardActionDims",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -220,26 +251,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
-                },
-                {
-                    "name": "",
-                    "id": "0e7568e6-1461-4c57-a2c5-23e14baf891b",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ThePauseActionTakeingDims",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "df99d26d-aeda-4d74-b259-c6cd77b2e83b",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TheScoreboardActionDims",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
