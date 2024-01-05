@@ -11,8 +11,11 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     public GameObject pauseMenuen;
     public GameObject vicMenuen;
     public TextMeshProUGUI titleText;
-    [SerializeField] public bool is_paused = false;
+    public bool is_paused = false;
+    public int holesPassed = 0;
     bool mom_i_am_winning = false;
+    [SerializeField] int numberOfHoles = 5;
+    [SerializeField] int[] holePoints;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     {
         
     }
+
+    #region Pausemenu
 
     public void pauseDims()
     {
@@ -39,13 +44,17 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         pauseMenuen.SetActive(is_paused);
     }
 
+    #endregion Pausemenu
+
+    #region WinMenu
     public void vicMenu()
     {
         mom_i_am_winning = true;
         Time.timeScale = 0;
         vicMenuen.SetActive(true);
-        int dims = SceneManager.GetActiveScene().buildIndex;
-        titleText.text = $"Hole {dims} Done";
+        //int dims = SceneManager.GetActiveScene().buildIndex;
+        holesPassed++;
+        titleText.text = $"Hole {holesPassed} Done";
     }
 
     public void nextHole()
@@ -53,8 +62,17 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         mom_i_am_winning = false;
         Time.timeScale = 1;
         vicMenuen.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //go to the next hole function
     }
+    #endregion WinMenu
+
+    #region Scoreboard
+
+    #endregion Scoreboard
+
+
+    #region Controls
 
     void OnThePauseActionTakeingDims(InputValue value)
     {
@@ -67,6 +85,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
             unPauseDims();
         }
     }
+
+    #endregion Controls
 
     public void Quit()
     {
