@@ -25,11 +25,13 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // laver de er ting hvor man får et overblik over hvilke huller som der er, og hvor mange points man har i alt.
         for (int i = 0; i < numberOfHoles; i++)
         {
             GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(TheParentOfAllParents.transform.position.x - 273 + (i * 50), TheParentOfAllParents.transform.position.y - 1, TheParentOfAllParents.transform.position.z), Quaternion.identity);
             kurt.transform.parent = TheParentOfAllParents.transform;
 
+            // få børneneenenen af hovedobjektet, for det skal man åbenbart have hvis man gerne vil ændre på det der tekst.
             List<GameObject> children = new List<GameObject>();
             foreach (Transform child in kurt.transform)
             {
