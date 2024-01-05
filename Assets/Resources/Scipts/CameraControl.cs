@@ -3,26 +3,30 @@ using UnityEngine.InputSystem;
 
 public class CameraControl : MonoBehaviour
 {
-    public bool freeCam = false;
+    bool freeCam = false;
 
-    public Transform targetObject;
+    // Usually ball
+    Transform targetObject;
 
     // Freecam
-    public float Speed = 8.0f;
-    public Vector3 move;
+    float Speed = 16.0f;
+    Vector3 move;
 
+    // Mouse movement in 2D relative to screen, not world
+    Vector2 DeltaLook;
 
-    public Vector2 look;
+    // cam rotation
     float yaw;
     float pitch;
 
     // Distance to taget in not freecam mode
     float camDist = 15f;
 
+    // For input system
     #region Inputs
     void OnMove(InputValue value) { move = value.Get<Vector3>(); }
-    void OnLook(InputValue value) { look = value.Get<Vector2>(); }
-    void OnToggleCam(InputValue value)
+    void OnLook(InputValue value) { DeltaLook = value.Get<Vector2>(); }
+    void OnToggleCam()
     {
         // If the player was previously in freecam mode, and changed it
         if (freeCam)
@@ -47,6 +51,9 @@ public class CameraControl : MonoBehaviour
 
     private void Start()
     {
+        // Set target
+        targetObject = GameObject.Find("Ball").transform;
+
         // set pich and yaw
         yaw = Camera.main.transform.rotation.x;
         pitch = Camera.main.transform.rotation.y;
@@ -60,11 +67,12 @@ public class CameraControl : MonoBehaviour
         
         if (freeCam)
         {
+            // Movement
             transform.position += relativeMovement * step;
         }
         else 
         {
-            // y-axis
+            // y-axis input
             transform.RotateAround(targetObject.transform.position, transform.right, 45 * move.z * Time.deltaTime);
 
             // x-axis input
@@ -86,8 +94,8 @@ public class CameraControl : MonoBehaviour
         {
             float sensitivity = 0.1f; // Adjust this value to change the speed of rotation
 
-            yaw += look.x * sensitivity;
-            pitch -= look.y * sensitivity;
+            yaw += DeltaLook.x * sensitivity;
+            pitch -= DeltaLook.y * sensitivity;
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0f);
         }

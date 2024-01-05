@@ -10,11 +10,13 @@ public class PlayerControls : MonoBehaviour
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
 
+    // Find stuff
     private void Start()
     {
         targetRB = GameObject.Find("Ball").GetComponent<Rigidbody>();
     }
 
+    // mostly debugging
     private void Update()
     {
         // Find direction
@@ -32,7 +34,8 @@ public class PlayerControls : MonoBehaviour
         if (TargetVelocity != Vector3.zero)
         {
             print("ball is moving, cannot fire");
-        } else
+        }
+        else
         {
             // Find direction
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
