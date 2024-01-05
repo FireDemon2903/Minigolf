@@ -12,14 +12,25 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     public GameObject vicMenuen;
     public GameObject scoreborad;
     public TextMeshProUGUI titleText;
+
     public bool is_paused = false;
     public int holesPassed = 0;
     bool mom_i_am_winning = false;
     [SerializeField] int numberOfHoles = 5;
     [SerializeField] int[] holePoints;
+
+    [SerializeField] GameObject ThePrefrabOfTheHolesYeah;
+    [SerializeField] GameObject TheParentOfAllParents;
+    [SerializeField] List<GameObject> TheHolesInScoreboard = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < numberOfHoles; i++)
+        {
+            GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(0, 0, 0), Quaternion.identity);
+            kurt.transform.parent = TheParentOfAllParents.transform;
+            TheHolesInScoreboard.Add(kurt);
+        }
         
     }
 
