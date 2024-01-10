@@ -7,6 +7,9 @@ public class PlayerControls : MonoBehaviour
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
+    bool isMoving => TargetVelocity != Vector3.zero;
+
+    Vector3 LastPos;
 
     bool Fire = true;
 
@@ -16,7 +19,16 @@ public class PlayerControls : MonoBehaviour
     // Find stuff
     private void Start()
     {
-        targetRB = GameObject.Find("Ball").GetComponent<Rigidbody>();
+        targetRB = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (!isMoving)
+        {
+            LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
+            print(LastPos);
+        }
     }
 
     // Pivate
@@ -61,6 +73,12 @@ public class PlayerControls : MonoBehaviour
         targetRB.velocity = Vector3.zero;
         targetRB.angularDrag = 0f;
         targetRB.angularVelocity = Vector3.zero;
+    }
+
+    void OnReset()
+    {
+        OnFire2();
+        transform.position = LastPos;
     }
 
 }
