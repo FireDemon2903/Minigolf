@@ -66,6 +66,7 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
+
         var step = Speed * Time.deltaTime; // calculate distance to move
 
         Vector3 relativeMovement = transform.rotation * move;
