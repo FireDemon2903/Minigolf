@@ -104,11 +104,19 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         Time.timeScale = 1;
         vicMenuen.SetActive(false);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //go to the next hole function
     }
     #endregion WinMenu
 
     #region Scoreboard
+    /// <summary>
+    /// opdatere hullets slag hvis du forstår
+    /// </summary>
+    /// <param name="hole">Hvilket hul som kan have sine points opdateret, her skal du bruge hul nummeret, så det  første hulnummer er 1</param>
+    /// <param name="hits">det antal som det har taget at klare det sepcifikket hul. stavede jeg speciffffikke rigtigt</param>
+    public void updateScoreborad(int hole, int hits)
+    {
+        TheHolesInScoreboard[hole - 1][1].GetComponent<TextMeshProUGUI>().text = $"{hits}";
+    }
 
     #endregion Scoreboard
 
