@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Scroll",
-                    "type": "Value",
-                    "id": "5e1db491-d0b9-42de-b728-7312bbe98f6e",
-                    "expectedControlType": "Delta",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ThePauseActionTakeingDims",
                     "type": "Button",
                     "id": "be9c8241-6d24-4a71-8ad4-6104a0d98825",
@@ -195,15 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9d0d7357-1140-4829-8140-321e04795981",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                },
-                {
-                    "name": "",
                     "id": "fb8db8ee-fb77-4793-b4c0-69211a692a08",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -251,7 +233,7 @@
                 {
                     "name": "Reset",
                     "type": "Button",
-                    "id": "b95d1bdf-07f7-42cc-bf89-e92b6432ebb3",
+                    "id": "40620db6-2038-470a-86f0-fd2958911067",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -283,19 +265,8 @@
                 },
                 {
                     "name": "",
-                    "id": "6a5a6df1-bf78-4ee9-ac03-f399e0a6f5bc",
+                    "id": "cee0ed31-a67a-4f9f-ad05-7acfc33e2c77",
                     "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "18958270-b8d8-488e-ad97-08ece1db1b6d",
-                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
