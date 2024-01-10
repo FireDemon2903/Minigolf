@@ -47,6 +47,11 @@ public class CameraControl : MonoBehaviour
         // Toggle freecam
         freeCam = !freeCam;
     }
+    void OnScroll(InputValue value)
+    {
+        float delta = value.Get<Vector2>().y * .02f;
+        camDist -= camDist - delta < 4 ? 0 : delta;
+    }
     #endregion Inputs
 
     private void Start()
@@ -78,6 +83,7 @@ public class CameraControl : MonoBehaviour
 
             // x-axis input
             transform.RotateAround(targetObject.transform.position, Vector3.up, 45 * move.x * Time.deltaTime);
+
             // Calculate the direction vector from the target to the camera
             Vector3 directionToCamera = transform.position - targetObject.position;
 
