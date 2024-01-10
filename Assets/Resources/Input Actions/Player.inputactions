@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ThePauseActionTakeingDims",
+                    "type": "Button",
+                    "id": "be9c8241-6d24-4a71-8ad4-6104a0d98825",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TheScoreboardActionDims",
+                    "type": "Button",
+                    "id": "c94f5457-fbe2-4f3e-a02e-92690008ba32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -163,6 +181,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb8db8ee-fb77-4793-b4c0-69211a692a08",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThePauseActionTakeingDims",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc4b563b-a613-48bd-8167-90c8416d7a8d",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TheScoreboardActionDims",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
