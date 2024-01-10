@@ -13,6 +13,7 @@ public class LydHondteringsScript : MonoBehaviour
     void Start()
     {
         volume = slider.value;
+        volumeLabel.text = $"Lydstyrke: {Mathf.Round(volume * 100f)}";
     }
 
     // Update is called once per frame

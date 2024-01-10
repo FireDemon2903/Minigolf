@@ -11,6 +11,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     public GameObject pauseMenuen;
     public GameObject vicMenuen;
     public GameObject scoreborad;
+    public GameObject settingmenu;
     public TextMeshProUGUI titleText;
 
     public bool is_paused = false;
@@ -70,6 +71,17 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     }
 
     #region settingsMenuen
+    public void openSetMenu()
+    {
+        settingmenu.SetActive(true);
+        pauseMenuen.SetActive(false);
+    }
+
+    public void closeSetMenu()
+    {
+        settingmenu.SetActive(false);
+        pauseMenuen.SetActive(true);
+    }
     #endregion settingsMenuen
 
     #endregion Pausemenu
@@ -112,6 +124,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         else if (!mom_i_am_winning && is_paused)
         {
             unPauseDims();
+            settingmenu.SetActive(false);
         }
     }
 
