@@ -622,7 +622,7 @@ MonoBehaviour:
   scoreborad: {fileID: 1110135125}
   settingmenu: {fileID: 189285167}
   titleText: {fileID: 1939330376}
-  is_paused: 1
+  is_paused: 0
   holesPassed: 0
   numberOfHoles: 5
   holePoints: 

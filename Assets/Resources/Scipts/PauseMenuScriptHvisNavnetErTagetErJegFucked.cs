@@ -26,6 +26,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        is_paused = false;
         // laver de er ting hvor man får et overblik over hvilke huller som der er, og hvor mange points man har i alt.
         for (int i = 0; i < numberOfHoles; i++)
         {
@@ -117,6 +118,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // ESC button pressed
     void OnThePauseActionTakeingDims(InputValue value)
     {
+        print("Jesus");
         if (!is_paused && !mom_i_am_winning)
         {
             pauseDims();
@@ -131,7 +133,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Tab button pressed and so on
     void OnTheScoreboardActionDims(InputValue value)
     {
-        scoreborad.SetActive(!scoreborad.active);
+        scoreborad.SetActive(!scoreborad.activeSelf);
     }
 
     #endregion Controls
