@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StartMenuScript : MonoBehaviour
 {
+    [SerializeField] GameObject petergriffin;
+    [SerializeField] TMP_Dropdown dophigh;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,18 @@ public class StartMenuScript : MonoBehaviour
     }
     public void startGame()
     {
+        print(dophigh.options[dophigh.value].text);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void controlsGuide()
+    {
+        petergriffin.SetActive(true);
+    }
+
+    public void closeDims()
+    {
+        petergriffin.SetActive(false);
     }
 
     public void doTheQuitting()
