@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
-    bool IsMoving => TargetVelocity != Vector3.zero;        // True if target vel is not zero
+    bool IsMoving => TargetVelocity.magnitude > 5;        // True if target vel is not zero
 
     Vector3 LastPos;
 
