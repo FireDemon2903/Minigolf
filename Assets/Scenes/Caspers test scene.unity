@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 206996303}
   - component: {fileID: 206996304}
   - component: {fileID: 206996305}
+  - component: {fileID: 206996306}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -622,6 +623,7 @@ MonoBehaviour:
   scoreborad: {fileID: 1110135125}
   settingmenu: {fileID: 189285167}
   titleText: {fileID: 1939330376}
+  smsDims: {fileID: 206996306}
   is_paused: 0
   holesPassed: 0
   playerNumbers: 2
@@ -705,6 +707,20 @@ MonoBehaviour:
   volumeLabel: {fileID: 2076149087}
   slider: {fileID: 736196820}
   volume: 0
+--- !u!114 &206996306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206996298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f314f38c85f31440bc167bf29d7a6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petergriffin: {fileID: 0}
+  dophigh: {fileID: 0}
 --- !u!1 &236482417
 GameObject:
   m_ObjectHideFlags: 0

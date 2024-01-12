@@ -14,6 +14,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     public GameObject settingmenu;
     public TextMeshProUGUI titleText;
 
+    public StartMenuScript smsDims;
+
     public bool is_paused = false;
     public int holesPassed = 0;
     public int playerNumbers = 2; // numbers of players that plays the game
@@ -28,6 +30,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print(smsDims.gert);
         is_paused = false;
 
         PlaceTheScoreDims();
