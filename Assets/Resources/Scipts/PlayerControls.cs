@@ -12,11 +12,11 @@ public class PlayerControls : MonoBehaviour
 
     Vector3 LastPos;
 
-    // True is lmbb is held down
+    // True is lmb is held down
     bool LMBPressed = true;
 
+    // true after force has been added, toggles affter coroutine to change player was started
     bool fired = false;
-
 
     Vector2 StartPress = Vector2.zero;
     Vector2 EndPress = Vector2.zero;
@@ -33,6 +33,15 @@ public class PlayerControls : MonoBehaviour
         {
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
             print(LastPos);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (fired && IsMoving)
+        {
+            fired = false;
+            StartCoroutine(WaitForMove());
         }
     }
 
@@ -57,15 +66,6 @@ public class PlayerControls : MonoBehaviour
             print("Added force");
 
             fired = true;
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (fired && IsMoving)
-        {
-            fired = false;
-            StartCoroutine(WaitForMove());
         }
     }
 
