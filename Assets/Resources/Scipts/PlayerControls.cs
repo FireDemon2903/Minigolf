@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +9,12 @@ public class PlayerControls : MonoBehaviour
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
 
-    bool Fire = true;
+    // True is lmbb is held down
+    bool LMBPressed = true;
+
+    bool fired = false;
+
+    public bool IsMoving => TargetVelocity != Vector3.zero;        // True if target vel is not zero
 
     Vector2 StartPress = Vector2.zero;
     Vector2 EndPress = Vector2.zero;
@@ -16,13 +22,13 @@ public class PlayerControls : MonoBehaviour
     // Find stuff
     private void Start()
     {
-        targetRB = GameObject.Find("Ball").GetComponent<Rigidbody>();
+        targetRB = GetComponent<Rigidbody>();
     }
 
     // Pivate
     void _AddVel(float force)
     {
-        if (TargetVelocity != Vector3.zero)
+        if (IsMoving)
         {
             print("ball is moving, cannot fire");
         }
@@ -36,24 +42,39 @@ public class PlayerControls : MonoBehaviour
 
             // Add the force
             targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
+
+            print("Added force");
+
+            fired = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (fired && IsMoving)
+        {
+            fired = false;
+            StartCoroutine(WaitForMove());
         }
     }
 
     // Toggle when held and released
-    void OnFire(InputValue Value)
+    void OnFire()
     {
-        if (Fire)
+        if (LMBPressed)
         {
             StartPress = Mouse.current.position.ReadValue();
         }
         else
         {
             EndPress = Mouse.current.position.ReadValue();
-            Vector2 Total = EndPress - StartPress;
+            Vector2 total = EndPress - StartPress;
 
-            _AddVel(Total.magnitude);
+            // To make sure thee ae no missclicks
+            if (total.magnitude > 50)
+                _AddVel(total.magnitude);
         }
-        Fire = !Fire;
+        LMBPressed = !LMBPressed;
     }
 
     void OnFire2()
@@ -63,4 +84,18 @@ public class PlayerControls : MonoBehaviour
         targetRB.angularVelocity = Vector3.zero;
     }
 
+    // Wait for ball to stop moving, then change player
+    IEnumerator WaitForMove()
+    {
+        // Wait
+        while (IsMoving)
+        {
+            yield return null;
+        }
+
+        print("test");
+
+        // Finished wait
+        print("Message sent"); Camera.main.SendMessage("NextBall");
+    }
 }

@@ -1,14 +1,16 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraControl : MonoBehaviour
 {
-    bool freeCam = false;
-
-    // Usually ball
+    // Multiplayer
+    int targetIndex = 0;
+    Transform[] targets;
     Transform targetObject;
 
     // Freecam
+    bool freeCam = false;
     float Speed = 16.0f;
     Vector3 move;
 
@@ -49,10 +51,33 @@ public class CameraControl : MonoBehaviour
     }
     #endregion Inputs
 
+    // Called through "SendMessage" in other scripts
+    void NextBall()
+    {
+        // Wrap
+        targetIndex = targetIndex++ >= targets.Length - 1 ? 0 : targetIndex++;
+
+        // Deactivate current active player
+        targetObject.GetComponent<PlayerInput>().enabled = false;
+
+        // Set
+        targetObject = targets[targetIndex];
+
+        // Enable controls
+        targetObject.GetComponent<PlayerInput>().enabled = true;
+
+        print("Changed player");
+    }
+
+
     private void Start()
     {
-        // Set target
-        targetObject = GameObject.Find("Ball").transform;
+        // Find tagets
+        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToArray();
+
+        // Set first target
+        targetObject = targets[targetIndex];
+        targetObject.GetComponent<PlayerInput>().enabled = true;
 
         // set pich and yaw
         yaw = Camera.main.transform.rotation.x;
@@ -61,7 +86,6 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
-
         var step = Speed * Time.deltaTime; // calculate distance to move
 
         Vector3 relativeMovement = transform.rotation * move;
