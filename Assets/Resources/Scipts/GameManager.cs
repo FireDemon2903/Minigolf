@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < pms.playerNumbers; i++)
         {
             GameObject temp = Instantiate(PlayerPrefab, Holes[i]);
+            temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
             Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
             Players.Add(temp);
         }
