@@ -51,6 +51,8 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
+            force *= .05f;
+
             // Find direction
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
 
