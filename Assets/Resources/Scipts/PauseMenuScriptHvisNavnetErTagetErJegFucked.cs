@@ -31,6 +31,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     void Start()
     {
         print(smsDims.gert);
+        playerNumbers = smsDims.gert;
         is_paused = false;
 
         PlaceTheScoreDims();
