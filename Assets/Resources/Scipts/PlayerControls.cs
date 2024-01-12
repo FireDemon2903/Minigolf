@@ -34,10 +34,7 @@ public class PlayerControls : MonoBehaviour
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
             print(LastPos);
         }
-    }
 
-    private void LateUpdate()
-    {
         if (fired && IsMoving)
         {
             fired = false;
@@ -62,8 +59,6 @@ public class PlayerControls : MonoBehaviour
 
             // Add the force
             targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
-
-            print("Added force");
 
             fired = true;
         }
@@ -95,6 +90,7 @@ public class PlayerControls : MonoBehaviour
         targetRB.angularVelocity = Vector3.zero;
     }
 
+    // Resets to last pos where ball was not moveing (then changes player (unintuitive, but oh well))
     void OnReset()
     {
         OnFire2();
@@ -109,8 +105,6 @@ public class PlayerControls : MonoBehaviour
         {
             yield return null;
         }
-
-        print("test");
 
         // Finished wait
         print("Message sent"); Camera.main.SendMessage("NextBall");
