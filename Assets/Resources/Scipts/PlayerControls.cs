@@ -8,16 +8,15 @@ public class PlayerControls : MonoBehaviour
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
-    bool isMoving => TargetVelocity != Vector3.zero;
+    bool IsMoving => TargetVelocity != Vector3.zero;        // True if target vel is not zero
 
     Vector3 LastPos;
 
-    // True is lmbb is held down
+    // True is lmb is held down
     bool LMBPressed = true;
 
+    // true after force has been added, toggles affter coroutine to change player was started
     bool fired = false;
-
-    public bool IsMoving => TargetVelocity != Vector3.zero;        // True if target vel is not zero
 
     Vector2 StartPress = Vector2.zero;
     Vector2 EndPress = Vector2.zero;
@@ -30,10 +29,19 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        if (!isMoving)
+        if (!IsMoving)
         {
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
             print(LastPos);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (fired && IsMoving)
+        {
+            fired = false;
+            StartCoroutine(WaitForMove());
         }
     }
 
@@ -58,15 +66,6 @@ public class PlayerControls : MonoBehaviour
             print("Added force");
 
             fired = true;
-        }
-    }
-
-    private void Update()
-    {
-        if (fired && IsMoving)
-        {
-            fired = false;
-            StartCoroutine(WaitForMove());
         }
     }
 
@@ -96,6 +95,12 @@ public class PlayerControls : MonoBehaviour
         targetRB.angularVelocity = Vector3.zero;
     }
 
+    void OnReset()
+    {
+        OnFire2();
+        transform.position = LastPos;
+    }
+
     // Wait for ball to stop moving, then change player
     IEnumerator WaitForMove()
     {
@@ -111,9 +116,4 @@ public class PlayerControls : MonoBehaviour
         print("Message sent"); Camera.main.SendMessage("NextBall");
     }
 
-    void OnReset()
-    {
-        OnFire2();
-        transform.position = LastPos;
-    }
 }
