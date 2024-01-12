@@ -3,15 +3,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject EventSystem;
+    PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
+
     GameObject Player;
     Transform[] Holes;
     int CurrentHole = 0;
 
-    private void Start()
+    private void Awake()
     {
-        Player = GameObject.FindWithTag("Player");
+        Player = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
+
+        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
 
         Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).ToArray();
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < pms.playerNumbers; i++)
+        {
+            GameObject temp = Instantiate(Player, Holes[i]);
+            Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
+        }
+        Camera.main.SendMessage("Begin");
     }
 
     private void Update()

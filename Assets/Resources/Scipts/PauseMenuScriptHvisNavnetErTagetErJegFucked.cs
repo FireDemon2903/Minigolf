@@ -30,7 +30,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print(smsDims.gert);
+        //print(smsDims.gert);
         playerNumbers = smsDims.gert;
         is_paused = false;
 
