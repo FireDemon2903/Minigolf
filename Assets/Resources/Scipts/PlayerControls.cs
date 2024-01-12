@@ -8,6 +8,9 @@ public class PlayerControls : MonoBehaviour
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
+    bool isMoving => TargetVelocity != Vector3.zero;
+
+    Vector3 LastPos;
 
     // True is lmbb is held down
     bool LMBPressed = true;
@@ -23,6 +26,15 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         targetRB = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (!isMoving)
+        {
+            LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
+            print(LastPos);
+        }
     }
 
     // Pivate
@@ -97,5 +109,11 @@ public class PlayerControls : MonoBehaviour
 
         // Finished wait
         print("Message sent"); Camera.main.SendMessage("NextBall");
+    }
+
+    void OnReset()
+    {
+        OnFire2();
+        transform.position = LastPos;
     }
 }
