@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,13 +7,14 @@ public class GameManager : MonoBehaviour
     public GameObject EventSystem;
     PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
 
-    GameObject Player;
+    GameObject PlayerPrefab;
+    List<GameObject> Players = new();
     Transform[] Holes;
     int CurrentHole = 0;
 
     private void Awake()
     {
-        Player = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
+        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
 
         pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
 
@@ -23,8 +25,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(Player, Holes[i]);
+            GameObject temp = Instantiate(PlayerPrefab, Holes[i]);
             Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
+            Players.Add(temp);
         }
         Camera.main.SendMessage("Begin");
     }
@@ -38,6 +41,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpdateScore(GameObject player, int hits)
+    {
+        int i = Players.IndexOf(player);
+        pms.updateScoreborad(CurrentHole, hits, i);
+    }
+
     void NextHole()
     {
         ToHole(CurrentHole);
@@ -46,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void ToHole(int hole)
     {
-        Player.transform.position = Holes[hole].position;
+        PlayerPrefab.transform.position = Holes[hole].position;
     }
 
     void Quit() { Application.Quit(); }
