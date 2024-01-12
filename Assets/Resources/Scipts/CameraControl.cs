@@ -51,8 +51,8 @@ public class CameraControl : MonoBehaviour
     }
     void OnScroll(InputValue value)
     {
-        float delta = value.Get<Vector2>().y * .005f;
-        camDist -= camDist - delta < .5 ? 0 : delta;
+        float delta = value.Get<Vector2>().y * .02f;
+        camDist -= camDist - delta < 4 ? 0 : delta;
     }
     #endregion Inputs
 
