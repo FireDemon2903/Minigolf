@@ -158,7 +158,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     /// <param name="player">Player nummer, som 1 --> hvilket er player 1, eller 2 --> som er player 2</param>
     public void updateScoreborad(int hole, int hits, int player)
     {
-        //TheHolesInScoreboard[hole - 1][1].GetComponent<TextMeshProUGUI>().text = $"{hits}";
+        TheHolesInScoreboard[hole - 1][player].GetComponent<TextMeshProUGUI>().text = $"{hits}";
     }
 
     #endregion Scoreboard

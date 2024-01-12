@@ -24,8 +24,7 @@ public class DoTheInTheHoleThing : MonoBehaviour
         {
             psme.vicMenu();
             int dims = Random.Range(1, 40); // fjern når det er
-            psme.holesPassed++;
-            //psme.updateScoreborad(psme.holesPassed, dims);
+            psme.updateScoreborad(1, dims + 1, 1);
         }
     }
 }
