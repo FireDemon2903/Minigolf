@@ -10,6 +10,9 @@ public class PlayerControls : MonoBehaviour
 
     public int Hits = 0;
 
+    AudioClip audioClip;
+    AudioSource audioSource;
+
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
     bool IsMoving => TargetVelocity.magnitude > 5;        // True if target vel is not zero
@@ -29,6 +32,14 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         targetRB = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+
+        audioClip = Resources.Load<AudioClip>("Sound/HitThatGolfBallMyGuy");
+
+        audioSource.clip = audioClip;
+
+        audioSource.Play();
+
     }
 
     private void Update()
@@ -68,6 +79,7 @@ public class PlayerControls : MonoBehaviour
             Hits++;
 
             gameManager.UpdateScore(gameObject, Hits);
+
         }
     }
 
@@ -85,7 +97,9 @@ public class PlayerControls : MonoBehaviour
 
             // To make sure thee ae no missclicks
             if (total.magnitude > 50)
+                audioSource.Play();
                 _AddVel(total.magnitude);
+
         }
         LMBPressed = !LMBPressed;
     }

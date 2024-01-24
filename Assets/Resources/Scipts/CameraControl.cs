@@ -75,6 +75,14 @@ public class CameraControl : MonoBehaviour
         print("Changed player");
     }
 
+    private void Start()
+    {
+        targets.AddRange(GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform));
+        print(targets.Count);
+
+        Begin();
+    }
+
     // Called in gamemanager
     void Begin()
     {
