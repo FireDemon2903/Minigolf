@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,8 +26,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     public GameObject ThePrefrabOfTheHolesYeah;
     public GameObject TheParentOfAllParents;
-    [SerializeField] GameObject FMigHvadLaverJegIkkeDom; // indsï¿½t PCount
-    [SerializeField] List<List<GameObject>> TheHolesInScoreboard = new List<List<GameObject>>(); // TheHolesInScoreboard[0][0] = Hul tekst, TheHolesInScoreboard[0][1] = point tekst og frem til sï¿½ mange spillere der er, TheHolesInScoreboard[0][2 + playercount] objektet som holder pï¿½ dem
+    [SerializeField] GameObject FMigHvadLaverJegIkkeDom; // indsæt PCount
+    [SerializeField] List<List<GameObject>> TheHolesInScoreboard = new List<List<GameObject>>(); // TheHolesInScoreboard[0][0] = Hul tekst, TheHolesInScoreboard[0][1] = point tekst og frem til så mange spillere der er, TheHolesInScoreboard[0][2 + playercount] objektet som holder på dem
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     #region add some shit
@@ -66,7 +66,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         {
             dims.SetActive(true);
         }
-        // laver de er ting hvor man fï¿½r et overblik over hvilke huller som der er, og hvor mange points man har i alt.
+        // laver de er ting hvor man får et overblik over hvilke huller som der er, og hvor mange points man har i alt.
         for (int i = 0; i < numberOfHoles; i++)
         {
             int hurtigInt = 0;
@@ -74,7 +74,7 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
             //kurt.transform.parent = TheParentOfAllParents.transform;
             kurt.transform.SetParent(TheParentOfAllParents.transform);
 
-            // fï¿½ bï¿½rneneenenen af hovedobjektet, for det skal man ï¿½benbart have hvis man gerne vil ï¿½ndre pï¿½ det der tekst.
+            // få børneneenenen af hovedobjektet, for det skal man åbenbart have hvis man gerne vil ændre på det der tekst.
             List<GameObject> children = new List<GameObject>();
             foreach (Transform child in kurt.transform)
             {
@@ -156,14 +156,15 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 
     #region Scoreboard
     /// <summary>
-    /// opdatere hullets slag hvis du forstï¿½r
+    /// opdatere hullets slag hvis du forstår
     /// </summary>
-    /// <param name="hole">Hvilket hul som kan have sine points opdateret, her skal du bruge hul nummeret, sï¿½ det  fï¿½rste hulnummer er 1</param>
+    /// <param name="hole">Hvilket hul som kan have sine points opdateret, her skal du bruge hul nummeret, så det  første hulnummer er 1</param>
     /// <param name="hits">det antal som det har taget at klare det sepcifikket hul. stavede jeg speciffffikke rigtigt</param>
     /// <param name="player">Player nummer, som 1 --> hvilket er player 1, eller 2 --> som er player 2</param>
     public void updateScoreborad(int hole, int hits, int player)
     {
-        TheHolesInScoreboard[hole - 1][player].GetComponent<TextMeshProUGUI>().text = $"{hits}";
+        print($"{hole}, {hits}, {player}");
+        TheHolesInScoreboard[hole][player + 1].GetComponent<TextMeshProUGUI>().text = $"{hits}";
     }
 
     #endregion Scoreboard

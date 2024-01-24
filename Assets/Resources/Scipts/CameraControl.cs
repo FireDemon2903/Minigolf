@@ -94,13 +94,13 @@ public class CameraControl : MonoBehaviour
         var step = Speed * Time.deltaTime; // calculate distance to move
 
         Vector3 relativeMovement = transform.rotation * move;
-
+        
         if (freeCam)
         {
             // Movement
             transform.position += relativeMovement * step;
         }
-        else
+        else 
         {
             // y-axis input
             transform.RotateAround(targetObject.transform.position, transform.right, 45 * move.z * Time.deltaTime);

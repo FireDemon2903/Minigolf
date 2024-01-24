@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Scene.unity
     guid: de48cba53d0964c4e83ea742abf084dd
   - enabled: 1
-    path: Assets/Scenes/Caspers test scene.unity
-    guid: 699a9d6814c89404a8eab5056ccc4217
+    path: Assets/Scenes/Map_Building.unity
+    guid: 95ef0ef4431bfa7468177f5fda5c0f3b
   m_configObjects: {}

@@ -17,11 +17,11 @@ public class StartMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public void startGame()
     {
-        int.TryParse(dophigh.options[dophigh.value].text, out playerNum);
+        int.TryParse(dophigh.options[dophigh.value].text , out playerNum);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
