@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour
     // Multiplayer
     int targetIndex = 0;
     public List<Transform> targets = new();
-    Transform targetObject;
+    public Transform targetObject;
 
     // Freecam
     bool freeCam = false;

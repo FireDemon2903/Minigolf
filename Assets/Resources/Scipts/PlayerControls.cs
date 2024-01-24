@@ -118,5 +118,4 @@ public class PlayerControls : MonoBehaviour
         // Finished wait
         print("Message sent"); Camera.main.SendMessage("NextBall");
     }
-
 }

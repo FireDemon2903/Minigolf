@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     GameObject PlayerPrefab;
     List<GameObject> Players = new();
-    Transform[] Holes;
+    [SerializeField] List<Transform> Holes;
     int CurrentHole = 0;
 
     private void Awake()
@@ -20,14 +20,14 @@ public class GameManager : MonoBehaviour
 
         pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
 
-        Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).ToArray();
+        Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).OrderBy(x => x.position.x).ToList();
     }
 
     private void Start()
     {
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, Holes[i]);
+            GameObject temp = Instantiate(PlayerPrefab, Holes[CurrentHole]);
             temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
             Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
             Players.Add(temp);
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void ToHole(int hole)
     {
-        PlayerPrefab.transform.position = Holes[hole].position;
+        Camera.main.GetComponent<CameraControl>().targetObject.position = Holes[hole].position;
     }
 
     void Quit() { Application.Quit(); }
