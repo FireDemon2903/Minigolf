@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    // merge :)
+
     public GameManager gameManager;
 
     public float forceToAdd = 1f;

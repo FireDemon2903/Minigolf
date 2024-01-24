@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
+    // :)
+
     // Multiplayer
     int targetIndex = 0;
     public List<Transform> targets = new();
