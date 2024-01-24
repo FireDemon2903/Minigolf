@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    public GameManager gameManager;
-
     public float forceToAdd = 1f;
 
     public int Hits = 0;
@@ -47,6 +45,7 @@ public class PlayerControls : MonoBehaviour
         if (!IsMoving)
         {
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
+            print(LastPos);
         }
 
         if (fired && IsMoving)
@@ -79,7 +78,6 @@ public class PlayerControls : MonoBehaviour
             Hits++;
 
             gameManager.UpdateScore(gameObject, Hits);
-
         }
     }
 
