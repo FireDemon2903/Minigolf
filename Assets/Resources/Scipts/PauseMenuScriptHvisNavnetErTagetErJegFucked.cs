@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,37 +8,90 @@ using UnityEngine.InputSystem;
 
 public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 {
+    // :)
     public GameObject pauseMenuen;
     public GameObject vicMenuen;
     public GameObject scoreborad;
     public GameObject settingmenu;
     public TextMeshProUGUI titleText;
 
+    public StartMenuScript smsDims;
+
     public bool is_paused = false;
     public int holesPassed = 0;
+    public int playerNumbers = 2; // numbers of players that plays the game
     bool mom_i_am_winning = false;
     [SerializeField] int numberOfHoles = 5;
     [SerializeField] int[] holePoints;
 
     public GameObject ThePrefrabOfTheHolesYeah;
     public GameObject TheParentOfAllParents;
-    [SerializeField] List<List<GameObject>> TheHolesInScoreboard = new List<List<GameObject>>(); // TheHolesInScoreboard[0][0] = Hul tekst, TheHolesInScoreboard[0][1] = point tekst, TheHolesInScoreboard[0][3] objektet som holder på dem
+    [SerializeField] GameObject FMigHvadLaverJegIkkeDom; // indsï¿½t PCount
+    [SerializeField] List<List<GameObject>> TheHolesInScoreboard = new List<List<GameObject>>(); // TheHolesInScoreboard[0][0] = Hul tekst, TheHolesInScoreboard[0][1] = point tekst og frem til sï¿½ mange spillere der er, TheHolesInScoreboard[0][2 + playercount] objektet som holder pï¿½ dem
     // Start is called before the first frame update
     void Start()
     {
+        //print(smsDims.gert);
+        playerNumbers = smsDims.gert;
         is_paused = false;
-        // laver de er ting hvor man får et overblik over hvilke huller som der er, og hvor mange points man har i alt.
+
+        PlaceTheScoreDims();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    #region add some shit
+    void PlaceTheScoreDims()
+    {
+        //temp liste 
+        List<GameObject> playerchildrenscoreboard = new List<GameObject>();
+        foreach (Transform child in FMigHvadLaverJegIkkeDom.transform)
+        {
+            playerchildrenscoreboard.Add(child.gameObject);
+        }
+
+        playerchildrenscoreboard.Reverse();
+
+        // tjekker hvor mange spillere der er
+        for (int i = 0; i < 4 - playerNumbers; i++)
+        {
+            playerchildrenscoreboard.RemoveAt(0);
+        }
+
+        foreach (GameObject dims in playerchildrenscoreboard)
+        {
+            dims.SetActive(true);
+        }
+        // laver de er ting hvor man fï¿½r et overblik over hvilke huller som der er, og hvor mange points man har i alt.
         for (int i = 0; i < numberOfHoles; i++)
         {
-            GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(TheParentOfAllParents.transform.position.x - 273 + (i * 50), TheParentOfAllParents.transform.position.y - 1, TheParentOfAllParents.transform.position.z), Quaternion.identity);
+            int hurtigInt = 0;
+            GameObject kurt = Instantiate(ThePrefrabOfTheHolesYeah, new Vector3(TheParentOfAllParents.transform.position.x - 222 + (i * 50), TheParentOfAllParents.transform.position.y - 3, TheParentOfAllParents.transform.position.z), Quaternion.identity);
             //kurt.transform.parent = TheParentOfAllParents.transform;
             kurt.transform.SetParent(TheParentOfAllParents.transform);
 
-            // få børneneenenen af hovedobjektet, for det skal man åbenbart have hvis man gerne vil ændre på det der tekst.
+            // fï¿½ bï¿½rneneenenen af hovedobjektet, for det skal man ï¿½benbart have hvis man gerne vil ï¿½ndre pï¿½ det der tekst.
             List<GameObject> children = new List<GameObject>();
             foreach (Transform child in kurt.transform)
             {
-                children.Add(child.gameObject);
+                if (hurtigInt == 0)
+                {
+                    children.Add(child.gameObject);
+                }
+                else if (hurtigInt <= playerNumbers)
+                {
+                    children.Add(child.gameObject);
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    break;
+                }
+                hurtigInt++;
             }
             children.Add(kurt);
             TheHolesInScoreboard.Add(children);
@@ -46,14 +99,8 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
             TextMeshProUGUI peter = TheHolesInScoreboard[i][0].GetComponent<TextMeshProUGUI>();
             peter.text = $"{i + 1}";
         }
-        
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
 
     #region Pausemenu
 
@@ -104,11 +151,20 @@ public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
         Time.timeScale = 1;
         vicMenuen.SetActive(false);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //go to the next hole function
     }
     #endregion WinMenu
 
     #region Scoreboard
+    /// <summary>
+    /// opdatere hullets slag hvis du forstï¿½r
+    /// </summary>
+    /// <param name="hole">Hvilket hul som kan have sine points opdateret, her skal du bruge hul nummeret, sï¿½ det  fï¿½rste hulnummer er 1</param>
+    /// <param name="hits">det antal som det har taget at klare det sepcifikket hul. stavede jeg speciffffikke rigtigt</param>
+    /// <param name="player">Player nummer, som 1 --> hvilket er player 1, eller 2 --> som er player 2</param>
+    public void updateScoreborad(int hole, int hits, int player)
+    {
+        TheHolesInScoreboard[hole - 1][player].GetComponent<TextMeshProUGUI>().text = $"{hits}";
+    }
 
     #endregion Scoreboard
 

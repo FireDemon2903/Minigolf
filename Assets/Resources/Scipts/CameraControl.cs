@@ -1,12 +1,15 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
+    // :)
+
     // Multiplayer
     int targetIndex = 0;
-    Transform[] targets;
+    public List<Transform> targets = new();
     Transform targetObject;
 
     // Freecam
@@ -60,7 +63,7 @@ public class CameraControl : MonoBehaviour
     void NextBall()
     {
         // Wrap
-        targetIndex = targetIndex++ >= targets.Length - 1 ? 0 : targetIndex++;
+        targetIndex = targetIndex++ >= targets.Count - 1 ? 0 : targetIndex++;
 
         // Deactivate current active player
         targetObject.GetComponent<PlayerInput>().enabled = false;
@@ -74,12 +77,9 @@ public class CameraControl : MonoBehaviour
         print("Changed player");
     }
 
-
-    private void Start()
+    // Called in gamemanager
+    void Begin()
     {
-        // Find tagets
-        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToArray();
-
         // Set first target
         targetObject = targets[targetIndex];
         targetObject.GetComponent<PlayerInput>().enabled = true;
@@ -94,13 +94,13 @@ public class CameraControl : MonoBehaviour
         var step = Speed * Time.deltaTime; // calculate distance to move
 
         Vector3 relativeMovement = transform.rotation * move;
-        
+
         if (freeCam)
         {
             // Movement
             transform.position += relativeMovement * step;
         }
-        else 
+        else
         {
             // y-axis input
             transform.RotateAround(targetObject.transform.position, transform.right, 45 * move.z * Time.deltaTime);

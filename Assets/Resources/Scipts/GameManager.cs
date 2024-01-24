@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
+{
+    // :)
+
     public GameObject EventSystem;
     PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
 
@@ -11,7 +14,7 @@ public class GameManager : MonoBehaviour
     Transform[] Holes;
     int CurrentHole = 0;
 
-    private void Start()
+    private void Awake()
     {
         PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
 
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     void ToHole(int hole)
     {
-        Player.transform.position = Holes[hole].position;
+        PlayerPrefab.transform.position = Holes[hole].position;
     }
 
     void Quit() { Application.Quit(); }
