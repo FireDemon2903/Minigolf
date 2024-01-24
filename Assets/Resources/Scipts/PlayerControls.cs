@@ -4,7 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    // merge :)
+
+    public GameManager gameManager;
+
     public float forceToAdd = 1f;
+
+    public int Hits = 0;
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
@@ -32,7 +38,6 @@ public class PlayerControls : MonoBehaviour
         if (!IsMoving)
         {
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
-            print(LastPos);
         }
 
         if (fired && IsMoving)
@@ -61,6 +66,10 @@ public class PlayerControls : MonoBehaviour
             targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
 
             fired = true;
+
+            Hits++;
+
+            gameManager.UpdateScore(gameObject, Hits);
         }
     }
 
