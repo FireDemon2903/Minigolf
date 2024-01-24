@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class CameraControl : MonoBehaviour
 {
-    // :)
-
     // Multiplayer
     int targetIndex = 0;
     Transform[] targets;
