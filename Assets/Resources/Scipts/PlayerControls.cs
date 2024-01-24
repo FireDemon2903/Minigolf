@@ -3,7 +3,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
-{
+    public GameManager gameManager;
+
+    public GameManager gameManager;
+
+    public int Hits = 0;
+
+    public GameManager gameManager;
+
+    public GameManager gameManager;
+
     public float forceToAdd = 1f;
 
     Rigidbody targetRB;
@@ -25,14 +34,12 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         targetRB = GetComponent<Rigidbody>();
-    }
 
     private void Update()
     {
         if (!IsMoving)
         {
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
-            print(LastPos);
         }
 
         if (fired && IsMoving)
@@ -55,6 +62,10 @@ public class PlayerControls : MonoBehaviour
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
 
             // Find horizontal direction and normalize
+
+            Hits++;
+
+            gameManager.UpdateScore(gameObject, Hits);
             Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
 
             // Add the force

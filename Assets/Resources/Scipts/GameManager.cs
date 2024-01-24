@@ -1,17 +1,35 @@
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    GameObject Player;
+    public GameObject EventSystem;
+    PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
+
+    GameObject PlayerPrefab;
+    List<GameObject> Players = new();
     Transform[] Holes;
     int CurrentHole = 0;
 
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player");
+        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
+
+        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
 
         Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).ToArray();
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < pms.playerNumbers; i++)
+        {
+            GameObject temp = Instantiate(PlayerPrefab, Holes[i]);
+            temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
+            Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
+            Players.Add(temp);
+        }
+        Camera.main.SendMessage("Begin");
     }
 
     private void Update()
@@ -21,6 +39,12 @@ public class GameManager : MonoBehaviour
         {
             NextHole();
         }
+    }
+
+    public void UpdateScore(GameObject player, int hits)
+    {
+        int i = Players.IndexOf(player);
+        pms.updateScoreborad(CurrentHole, hits, i);
     }
 
     void NextHole()
