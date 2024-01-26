@@ -9,30 +9,35 @@ public class GameManager : MonoBehaviour
     public GameObject EventSystem;
     PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
 
+    CameraControl cameraControl;
+
     GameObject PlayerPrefab;
     List<GameObject> Players = new();
-    [SerializeField] List<Transform> Holes;
+    [SerializeField] List<Transform> StartingPositions;
     int CurrentHole = 0;
-
-    private void Awake()
-    {
-        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
-
-        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
-
-        Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).OrderBy(x => x.position.x).ToList();
-    }
 
     private void Start()
     {
+        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/PlayerPrefab");
+
+        cameraControl = Camera.main.GetComponent<CameraControl>();
+        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
+
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, Holes[0]);
-            temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
-            Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
+            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0]);
+            temp.GetComponent<PlayerControls>().gameManager = this;
+            cameraControl.targets.Add(temp.transform);
             Players.Add(temp);
         }
         Camera.main.SendMessage("Begin");
+    }
+
+    private void Awake()
+    {
+        StartingPositions = GameObject.FindGameObjectsWithTag("Startpoint").Select(x => x.transform).OrderBy(x => x.position.x).ToList();
+
+        print(StartingPositions.Count);
     }
 
     private void Update()
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour
         // For testing; not important
         if (Input.GetKeyDown(KeyCode.G))
         {
-            NextHole(Camera.main.GetComponent<CameraControl>().targetObject.gameObject, CurrentHole);
+            NextHole(cameraControl.targetObject.gameObject, CurrentHole);
         }
     }
 
@@ -50,14 +55,9 @@ public class GameManager : MonoBehaviour
         pms.updateScoreborad(CurrentHole, hits, i);
     }
 
-    public void NextHole(GameObject player, int hole)
+    public void NextHole(GameObject player, int holeIndex)
     {
-        ToHole(player, hole);
-    }
-
-    void ToHole(GameObject player, int hole)
-    {
-        player.transform.position = Holes[hole].position;
+        player.transform.position = StartingPositions[holeIndex].position;
     }
 
     void Quit() { Application.Quit(); }
