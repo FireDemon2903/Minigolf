@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    // merge :)
-
     public GameManager gameManager;
 
     GravitySource[] gravitySources;
@@ -33,9 +31,9 @@ public class PlayerControls : MonoBehaviour
     // Find stuff
     private void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
-        targetRB.useGravity = false;
     }
 
     private void FixedUpdate()
@@ -63,18 +61,21 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Hole"))
+        if (other.gameObject.CompareTag("Hole"))
         {
-            print("test");
             Hole++;
             gameManager.NextHole(gameObject, Hole);
+        }
+        else if (other.gameObject.CompareTag("Finish"))
+        {
+            gameManager.PlayerWon(gameObject);
         }
     }
 
     // Pivate
-    void _AddVel(float force)
+    void AddVel(float force)
     {
         if (IsMoving)
         {
@@ -95,7 +96,7 @@ public class PlayerControls : MonoBehaviour
 
             Hits++;
 
-            //gameManager.UpdateScore(gameObject, Hits);
+            gameManager.UpdateScore(gameObject, Hits);
         }
     }
 
@@ -113,7 +114,7 @@ public class PlayerControls : MonoBehaviour
 
             // To make sure thee ae no missclicks
             if (total.magnitude > 50)
-                _AddVel(total.magnitude);
+                AddVel(total.magnitude);
         }
         LMBPressed = !LMBPressed;
     }

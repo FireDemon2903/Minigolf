@@ -1,38 +1,59 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System.ComponentModel;
 
 public class GameManager : MonoBehaviour
 {
-    // :)
-
     public GameObject EventSystem;
     PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
 
+    CameraControl cameraControl;
+
     GameObject PlayerPrefab;
-    List<GameObject> Players = new();
-    [SerializeField] List<Transform> Holes;
+    readonly List<GameObject> Players = new();
+    [SerializeField] List<Transform> StartingPositions;
     int CurrentHole = 0;
 
-    private void Awake()
+    readonly List<Vector3> Scaling = new()
     {
-        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/Ball");
+        new Vector3(.1f, .1f, .1f),
+        Vector3.one,
+        new Vector3(.5f, .5f, .5f),
+        new Vector3()
+    };
 
-        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
-
-        Holes = GameObject.FindGameObjectsWithTag("Hole").Select(x => x.transform).OrderBy(x => x.position.x).ToList();
-    }
+    readonly List<Color> colors = new()
+    {
+        Color.red,
+        Color.green,
+        Color.blue,
+        new Color(218,165,32)
+    };
 
     private void Start()
     {
+        PlayerPrefab = Resources.Load<GameObject>(@"Prefabs/Player/PlayerPrefab");
+
+        cameraControl = Camera.main.GetComponent<CameraControl>();
+        pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
+
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, Holes[0]);
-            temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
-            Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
+            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0]);
+            temp.GetComponent<PlayerControls>().gameManager = this;
+            cameraControl.targets.Add(temp.transform);
             Players.Add(temp);
+            temp.GetComponent<Renderer>().material.color = colors[i];
         }
         Camera.main.SendMessage("Begin");
+    }
+
+    private void Awake()
+    {
+        StartingPositions = GameObject.FindGameObjectsWithTag("Startpoint").Select(x => x.transform).OrderBy(x => x.position.x).ToList();
+
+        print(StartingPositions.Count);
     }
 
     private void Update()
@@ -40,7 +61,11 @@ public class GameManager : MonoBehaviour
         // For testing; not important
         if (Input.GetKeyDown(KeyCode.G))
         {
-            NextHole(Camera.main.GetComponent<CameraControl>().targetObject.gameObject, CurrentHole);
+            NextHole(cameraControl.targetObject.gameObject, CurrentHole);
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            ToggleBuiltinGravity(cameraControl.targetObject.gameObject);
         }
     }
 
@@ -50,14 +75,30 @@ public class GameManager : MonoBehaviour
         pms.updateScoreborad(CurrentHole, hits, i);
     }
 
-    public void NextHole(GameObject player, int hole)
+    public void NextHole(GameObject player, int holeIndex)
     {
-        ToHole(player, hole);
+        // If the player reaches last level (planets)
+        if (holeIndex == StartingPositions.Count - 1) { ToggleBuiltinGravity(player); }
+        ScaleAll(player, holeIndex);
+        player.transform.position = StartingPositions[holeIndex].position;
+    }
+    
+    void ToggleBuiltinGravity(GameObject player)
+    {
+        player.GetComponent<Rigidbody>().useGravity = !player.GetComponent<Rigidbody>().useGravity;
     }
 
-    void ToHole(GameObject player, int hole)
+    void ScaleAll(GameObject player, int holeIndex)
     {
-        player.transform.position = Holes[hole].position;
+        player.GetComponent<Rigidbody>().mass = Scaling[holeIndex].x * 10;
+        player.transform.localScale = Scaling[holeIndex];
+    }
+
+    public void PlayerWon(GameObject player)
+    {
+        cameraControl.SendMessage("NextBall");
+        cameraControl.targets.Remove(player.transform);
+        Destroy(player);
     }
 
     void Quit() { Application.Quit(); }
