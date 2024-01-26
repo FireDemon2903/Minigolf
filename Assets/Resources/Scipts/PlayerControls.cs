@@ -84,7 +84,7 @@ public class PlayerControls : MonoBehaviour
 
             Hits++;
 
-            gameManager.UpdateScore(gameObject, Hits);
+            //gameManager.UpdateScore(gameObject, Hits);
         }
     }
 
@@ -110,7 +110,6 @@ public class PlayerControls : MonoBehaviour
     void OnFire2()
     {
         targetRB.velocity = Vector3.zero;
-        targetRB.angularDrag = 0f;
         targetRB.angularVelocity = Vector3.zero;
     }
 
