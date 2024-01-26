@@ -8,6 +8,8 @@ public class PlayerControls : MonoBehaviour
 
     public GameManager gameManager;
 
+    GravitySource[] gravitySources;
+
     public float forceToAdd = 1f;
 
     public int Hits = 0;
@@ -31,6 +33,19 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         targetRB = GetComponent<Rigidbody>();
+        gravitySources = FindObjectsOfType<GravitySource>();
+        targetRB.useGravity = false;
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 gravity = Vector3.zero;
+        foreach (var source in gravitySources)
+        {
+            gravity += source.GetGravity(targetRB.position);
+        }
+        targetRB.velocity += gravity * Time.fixedDeltaTime;
+
     }
 
     private void Update()
