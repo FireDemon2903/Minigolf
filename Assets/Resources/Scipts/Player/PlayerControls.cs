@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    // merge :)
-
     public GameManager gameManager;
 
     GravitySource[] gravitySources;
@@ -33,6 +31,7 @@ public class PlayerControls : MonoBehaviour
     // Find stuff
     private void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
         targetRB.useGravity = false;
@@ -63,9 +62,9 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Hole"))
+        if (other.gameObject.CompareTag("Hole"))
         {
             print("test");
             Hole++;
