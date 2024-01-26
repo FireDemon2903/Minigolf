@@ -32,7 +32,7 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
-        targetRB.useGravity = false; Hole = 5;
+        //targetRB.useGravity = false; Hole = 5;
     }
 
     private void FixedUpdate()
@@ -71,6 +71,10 @@ public class PlayerControls : MonoBehaviour
         {
             gameManager.PlayerWon(gameObject);
         }
+        else if (other.CompareTag("Saturn"))
+        {
+            gameManager.ToHole(gameObject, Hole);
+        }
     }
 
     // Pivate
@@ -86,7 +90,7 @@ public class PlayerControls : MonoBehaviour
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
 
             // Scale the force
-            force *= gameManager.Scaling[5].x;
+            force *= gameManager.Scaling[Hole].x * .2f;
 
             // Add the force
             if (Hole != 5)
