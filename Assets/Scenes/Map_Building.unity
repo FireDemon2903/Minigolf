@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 28036048}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Hole
+  m_TagString: Startpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1777,7 +1777,7 @@ GameObject:
   - component: {fileID: 845376739}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Hole
+  m_TagString: Startpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2071,7 +2071,7 @@ GameObject:
   - component: {fileID: 1062701040}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Hole
+  m_TagString: Startpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2396,7 +2396,7 @@ GameObject:
   - component: {fileID: 1473586773}
   m_Layer: 0
   m_Name: GameObject (3)
-  m_TagString: Hole
+  m_TagString: Startpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
