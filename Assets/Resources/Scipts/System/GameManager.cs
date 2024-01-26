@@ -1,11 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System.ComponentModel;
 
 public class GameManager : MonoBehaviour
 {
-    // :)
-
     public GameObject EventSystem;
     PauseMenuScriptHvisNavnetErTagetErJegFucked pms;
 
@@ -15,6 +14,14 @@ public class GameManager : MonoBehaviour
     List<GameObject> Players = new();
     [SerializeField] List<Transform> StartingPositions;
     int CurrentHole = 0;
+
+    readonly List<Vector3> Scaling = new()
+    {
+        new Vector3(.1f, .1f, .1f),
+        Vector3.one,
+        new Vector3(.5f, .5f, .5f),
+        new Vector3()
+    };
 
     private void Start()
     {
@@ -47,6 +54,10 @@ public class GameManager : MonoBehaviour
         {
             NextHole(cameraControl.targetObject.gameObject, CurrentHole);
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            ToggleBuiltinGravity(cameraControl.targetObject.gameObject);
+        }
     }
 
     public void UpdateScore(GameObject player, int hits)
@@ -57,7 +68,21 @@ public class GameManager : MonoBehaviour
 
     public void NextHole(GameObject player, int holeIndex)
     {
+        // If the player reaches last level (planets)
+        if (holeIndex == StartingPositions.Count - 1) { ToggleBuiltinGravity(player); }
+        ScaleAll(player, holeIndex);
         player.transform.position = StartingPositions[holeIndex].position;
+    }
+    
+    void ToggleBuiltinGravity(GameObject player)
+    {
+        player.GetComponent<Rigidbody>().useGravity = !player.GetComponent<Rigidbody>().useGravity;
+    }
+
+    void ScaleAll(GameObject player, int holeIndex)
+    {
+        player.GetComponent<Rigidbody>().mass = Scaling[holeIndex].x * 10;
+        player.transform.localScale = Scaling[holeIndex];
     }
 
     void Quit() { Application.Quit(); }
