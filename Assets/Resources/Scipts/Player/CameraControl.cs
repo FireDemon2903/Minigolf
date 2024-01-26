@@ -77,6 +77,12 @@ public class CameraControl : MonoBehaviour
         print("Changed player");
     }
 
+    private void Start()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToList();
+        Begin();
+    }
+
     // Called in gamemanager
     void Begin()
     {
@@ -103,10 +109,10 @@ public class CameraControl : MonoBehaviour
         else 
         {
             // y-axis input
-            transform.RotateAround(targetObject.transform.position, transform.right, 45 * move.z * Time.deltaTime);
+            transform.RotateAround(targetObject.transform.position, transform.right, 80 * move.z * Time.deltaTime);
 
             // x-axis input
-            transform.RotateAround(targetObject.transform.position, Vector3.up, 45 * move.x * Time.deltaTime);
+            transform.RotateAround(targetObject.transform.position, Vector3.up, 80 * move.x * Time.deltaTime);
 
             // Calculate the direction vector from the target to the camera
             Vector3 directionToCamera = transform.position - targetObject.position;
