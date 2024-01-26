@@ -115,6 +115,7 @@ public class PlayerControls : MonoBehaviour
         if (LMBPressed)
         {
             StartPress = Mouse.current.position.ReadValue();
+            print(1);
         }
         else
         {
@@ -122,9 +123,10 @@ public class PlayerControls : MonoBehaviour
             Vector2 total = EndPress - StartPress;
 
             // To make sure thee ae no missclicks
-            if (total.magnitude > 50) { AddVel(total.magnitude); }
+            if (total.magnitude > 50) { AddVel(total.magnitude); } else { LMBPressed = !LMBPressed; }
+            print(2);
         }
-            LMBPressed = !LMBPressed;
+        LMBPressed = !LMBPressed;
     }
 
     void OnFire2()

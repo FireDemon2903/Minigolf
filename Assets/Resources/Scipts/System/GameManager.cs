@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
         new Vector3(.1f, .1f, .1f) * 2,
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
-        new Vector3()
+        Vector3.one,
+        Vector3.one
     };
     readonly List<Color> colors = new()
     {
@@ -77,10 +78,10 @@ public class GameManager : MonoBehaviour
 
     public void ToHole(GameObject player, int holeIndex)
     {
-        // If the player reaches last level (planets)
-        if (holeIndex == StartingPositions.Count - 1) { ToggleBuiltinGravity(player); }
-        ScaleAll(player, holeIndex);
-        player.transform.position = StartingPositions[holeIndex].position;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;           // Reset vel
+        if (holeIndex == 5) { ToggleBuiltinGravity(player); }               // If the player reaches last level (planets)
+        //ScaleAll(player, holeIndex);                                        // Scale
+        player.transform.position = StartingPositions[holeIndex].position;  // set pos
     }
     
     void ToggleBuiltinGravity(GameObject player)
