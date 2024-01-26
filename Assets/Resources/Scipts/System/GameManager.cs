@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, Holes[CurrentHole]);
+            GameObject temp = Instantiate(PlayerPrefab, Holes[0]);
             temp.gameObject.GetComponent<PlayerControls>().gameManager = this;
             Camera.main.GetComponent<CameraControl>().targets.Add(temp.transform);
             Players.Add(temp);
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         // For testing; not important
         if (Input.GetKeyDown(KeyCode.G))
         {
-            NextHole();
+            NextHole(Camera.main.GetComponent<CameraControl>().targetObject.gameObject, CurrentHole);
         }
     }
 
@@ -50,15 +50,14 @@ public class GameManager : MonoBehaviour
         pms.updateScoreborad(CurrentHole, hits, i);
     }
 
-    void NextHole()
+    public void NextHole(GameObject player, int hole)
     {
-        ToHole(CurrentHole);
-        CurrentHole++;
+        ToHole(player, hole);
     }
 
-    void ToHole(int hole)
+    void ToHole(GameObject player, int hole)
     {
-        Camera.main.GetComponent<CameraControl>().targetObject.position = Holes[hole].position;
+        player.transform.position = Holes[hole].position;
     }
 
     void Quit() { Application.Quit(); }

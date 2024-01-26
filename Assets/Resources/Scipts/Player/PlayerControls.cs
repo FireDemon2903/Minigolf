@@ -8,9 +8,12 @@ public class PlayerControls : MonoBehaviour
 
     public GameManager gameManager;
 
+    GravitySource[] gravitySources;
+
     public float forceToAdd = 1f;
 
     public int Hits = 0;
+    public int Hole = 0;
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
@@ -31,6 +34,19 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         targetRB = GetComponent<Rigidbody>();
+        gravitySources = FindObjectsOfType<GravitySource>();
+        targetRB.useGravity = false;
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 gravity = Vector3.zero;
+        foreach (var source in gravitySources)
+        {
+            gravity += source.GetGravity(targetRB.position);
+        }
+        targetRB.velocity += gravity * Time.fixedDeltaTime;
+
     }
 
     private void Update()
@@ -44,6 +60,16 @@ public class PlayerControls : MonoBehaviour
         {
             fired = false;
             StartCoroutine(WaitForMove());
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
+        {
+            print("test");
+            Hole++;
+            gameManager.NextHole(gameObject, Hole);
         }
     }
 
@@ -69,7 +95,7 @@ public class PlayerControls : MonoBehaviour
 
             Hits++;
 
-            gameManager.UpdateScore(gameObject, Hits);
+            //gameManager.UpdateScore(gameObject, Hits);
         }
     }
 
@@ -95,7 +121,6 @@ public class PlayerControls : MonoBehaviour
     void OnFire2()
     {
         targetRB.velocity = Vector3.zero;
-        targetRB.angularDrag = 0f;
         targetRB.angularVelocity = Vector3.zero;
     }
 
