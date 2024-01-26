@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     CameraControl cameraControl;
 
     GameObject PlayerPrefab;
-    List<GameObject> Players = new();
+    readonly List<GameObject> Players = new();
     [SerializeField] List<Transform> StartingPositions;
     int CurrentHole = 0;
 
@@ -21,6 +21,14 @@ public class GameManager : MonoBehaviour
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
         new Vector3()
+    };
+
+    readonly List<Color> colors = new()
+    {
+        Color.red,
+        Color.green,
+        Color.blue,
+        new Color(218,165,32)
     };
 
     private void Start()
@@ -36,6 +44,7 @@ public class GameManager : MonoBehaviour
             temp.GetComponent<PlayerControls>().gameManager = this;
             cameraControl.targets.Add(temp.transform);
             Players.Add(temp);
+            temp.GetComponent<Renderer>().material.color = colors[i];
         }
         Camera.main.SendMessage("Begin");
     }
@@ -83,6 +92,13 @@ public class GameManager : MonoBehaviour
     {
         player.GetComponent<Rigidbody>().mass = Scaling[holeIndex].x * 10;
         player.transform.localScale = Scaling[holeIndex];
+    }
+
+    public void PlayerWon(GameObject player)
+    {
+        cameraControl.SendMessage("NextBall");
+        cameraControl.targets.Remove(player.transform);
+        Destroy(player);
     }
 
     void Quit() { Application.Quit(); }
