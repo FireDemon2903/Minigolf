@@ -32,7 +32,7 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
-        //targetRB.useGravity = false;
+        targetRB.useGravity = false; Hole = 5;
     }
 
     private void FixedUpdate()
@@ -86,10 +86,10 @@ public class PlayerControls : MonoBehaviour
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
 
             // Scale the force
-            force *= gameManager.Scaling[Hole].x;
+            force *= gameManager.Scaling[5].x;
 
             // Add the force
-            if (Hole != 3)
+            if (Hole != 5)
             {
                 // Find horizontal direction and normalize
                 Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
@@ -98,7 +98,7 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                targetRB.AddForce(direction * force, ForceMode.Impulse);
+                targetRB.AddForce(direction.normalized * force, ForceMode.Impulse);
             }
 
             fired = true;
@@ -115,7 +115,6 @@ public class PlayerControls : MonoBehaviour
         if (LMBPressed)
         {
             StartPress = Mouse.current.position.ReadValue();
-            print(1);
         }
         else
         {
@@ -124,7 +123,6 @@ public class PlayerControls : MonoBehaviour
 
             // To make sure thee ae no missclicks
             if (total.magnitude > 50) { AddVel(total.magnitude); } else { LMBPressed = !LMBPressed; }
-            print(2);
         }
         LMBPressed = !LMBPressed;
     }

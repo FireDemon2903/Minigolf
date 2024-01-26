@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
         Vector3.one,
+        Vector3.one,
         Vector3.one
     };
     readonly List<Color> colors = new()
@@ -99,7 +100,6 @@ public class GameManager : MonoBehaviour
     {
         cameraControl.SendMessage("NextBall");
         cameraControl.targets.Remove(player.transform);
-        Destroy(player);
     }
 
     void Quit() { Application.Quit(); }
