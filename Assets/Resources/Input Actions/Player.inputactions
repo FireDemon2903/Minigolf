@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "2002499f-4566-4e5b-b42d-2b4d6bb10e10",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -205,6 +214,17 @@
                     "action": "TheScoreboardActionDims",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aacec65b-a552-4c66-b624-89f5529d6497",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -219,7 +239,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Fire2",
@@ -234,6 +254,15 @@
                     "name": "Reset",
                     "type": "Button",
                     "id": "40620db6-2038-470a-86f0-fd2958911067",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HardReset",
+                    "type": "Button",
+                    "id": "15025936-87bd-422c-a84f-8fc2879e5a8d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -266,11 +295,22 @@
                 {
                     "name": "",
                     "id": "cee0ed31-a67a-4f9f-ad05-7acfc33e2c77",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7eb02a7-d9ad-4a0b-b9c2-736af500602a",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HardReset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

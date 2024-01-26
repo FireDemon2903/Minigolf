@@ -53,7 +53,7 @@ public class CameraControl : MonoBehaviour
     void OnScroll(InputValue value)
     {
         float delta = value.Get<Vector2>().y * .02f;
-        camDist -= camDist - delta < 4 ? 0 : delta;
+        camDist -= camDist - delta < .2 ? 0 : delta;
     }
     #endregion Inputs
 
@@ -75,11 +75,11 @@ public class CameraControl : MonoBehaviour
         print("Changed player");
     }
 
-//    private void Start()
-//    {
-//        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToList();
-//        Begin();
-//    }
+    private void Start()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToList();
+        Begin();
+    }
 
     // Called in gamemanager
     void Begin()
