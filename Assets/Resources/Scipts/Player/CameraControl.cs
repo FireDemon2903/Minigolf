@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
-    // :)
-
     // Multiplayer
     int targetIndex = 0;
     public List<Transform> targets = new();
@@ -77,11 +75,11 @@ public class CameraControl : MonoBehaviour
         print("Changed player");
     }
 
-    private void Start()
-    {
-        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToList();
-        Begin();
-    }
+//    private void Start()
+//    {
+//        targets = GameObject.FindGameObjectsWithTag("Player").Select(x => x.transform).ToList();
+//        Begin();
+//    }
 
     // Called in gamemanager
     void Begin()
