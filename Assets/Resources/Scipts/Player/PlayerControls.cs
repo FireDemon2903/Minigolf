@@ -66,7 +66,7 @@ public class PlayerControls : MonoBehaviour
         if (other.gameObject.CompareTag("Hole"))
         {
             Hole++;
-            gameManager.NextHole(gameObject, Hole);
+            gameManager.ToHole(gameObject, Hole);
         }
         else if (other.gameObject.CompareTag("Finish"))
         {
@@ -88,6 +88,9 @@ public class PlayerControls : MonoBehaviour
 
             // Find horizontal direction and normalize
             Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
+
+            // Scale the force
+            force *= gameManager.Scaling[Hole].x;
 
             // Add the force
             targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
@@ -130,6 +133,11 @@ public class PlayerControls : MonoBehaviour
     {
         OnFire2();
         transform.position = LastPos;
+    }
+
+    void OnHardReset()
+    {
+        gameManager.ToHole(gameObject, Hole);
     }
 
     // Wait for ball to stop moving, then change player
