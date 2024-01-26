@@ -15,14 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<Transform> StartingPositions;
     int CurrentHole = 0;
 
-    readonly List<Vector3> Scaling = new()
+    public readonly List<Vector3> Scaling = new()
     {
-        new Vector3(.1f, .1f, .1f),
+        new Vector3(.1f, .1f, .1f) * 2,
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
-        new Vector3()
+        Vector3.one,
+        Vector3.one
     };
-
     readonly List<Color> colors = new()
     {
         Color.red,
@@ -40,11 +40,12 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0]);
+            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0].position, Quaternion.identity);
             temp.GetComponent<PlayerControls>().gameManager = this;
             cameraControl.targets.Add(temp.transform);
             Players.Add(temp);
             temp.GetComponent<Renderer>().material.color = colors[i];
+            ScaleAll(temp, 0);
         }
         Camera.main.SendMessage("Begin");
     }
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
         // For testing; not important
         if (Input.GetKeyDown(KeyCode.G))
         {
-            NextHole(cameraControl.targetObject.gameObject, CurrentHole);
+            ToHole(cameraControl.targetObject.gameObject, CurrentHole);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
@@ -72,15 +73,15 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(GameObject player, int hits)
     {
         int i = Players.IndexOf(player);
-        pms.updateScoreborad(CurrentHole, hits, i);
+        pms.updateScoreborad(player.GetComponent<PlayerControls>().Hole, hits, i);
     }
 
-    public void NextHole(GameObject player, int holeIndex)
+    public void ToHole(GameObject player, int holeIndex)
     {
-        // If the player reaches last level (planets)
-        if (holeIndex == StartingPositions.Count - 1) { ToggleBuiltinGravity(player); }
-        ScaleAll(player, holeIndex);
-        player.transform.position = StartingPositions[holeIndex].position;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;           // Reset vel
+        if (holeIndex == 5) { ToggleBuiltinGravity(player); }               // If the player reaches last level (planets)
+        //ScaleAll(player, holeIndex);                                        // Scale
+        player.transform.position = StartingPositions[holeIndex].position;  // set pos
     }
     
     void ToggleBuiltinGravity(GameObject player)
