@@ -13,6 +13,7 @@ public class PlayerControls : MonoBehaviour
     public float forceToAdd = 1f;
 
     public int Hits = 0;
+    public int Hole = 0;
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
@@ -59,6 +60,16 @@ public class PlayerControls : MonoBehaviour
         {
             fired = false;
             StartCoroutine(WaitForMove());
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
+        {
+            print("test");
+            Hole++;
+            gameManager.NextHole(gameObject, Hole);
         }
     }
 
