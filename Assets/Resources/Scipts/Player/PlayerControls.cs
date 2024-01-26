@@ -8,8 +8,6 @@ public class PlayerControls : MonoBehaviour
 
     GravitySource[] gravitySources;
 
-    public float forceToAdd = 1f;
-
     public int Hits = 0;
     public int Hole = 0;
 
@@ -34,6 +32,7 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
+        //targetRB.useGravity = false;
     }
 
     private void FixedUpdate()
@@ -86,14 +85,21 @@ public class PlayerControls : MonoBehaviour
             // Find direction
             Vector3 direction = targetRB.transform.position - Camera.main.transform.position;
 
-            // Find horizontal direction and normalize
-            Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
-
             // Scale the force
             force *= gameManager.Scaling[Hole].x;
 
             // Add the force
-            targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
+            if (Hole != 3)
+            {
+                // Find horizontal direction and normalize
+                Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
+                
+                targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
+            }
+            else
+            {
+                targetRB.AddForce(direction * force, ForceMode.Impulse);
+            }
 
             fired = true;
 
@@ -116,10 +122,9 @@ public class PlayerControls : MonoBehaviour
             Vector2 total = EndPress - StartPress;
 
             // To make sure thee ae no missclicks
-            if (total.magnitude > 50)
-                AddVel(total.magnitude);
+            if (total.magnitude > 50) { AddVel(total.magnitude); }
         }
-        LMBPressed = !LMBPressed;
+            LMBPressed = !LMBPressed;
     }
 
     void OnFire2()

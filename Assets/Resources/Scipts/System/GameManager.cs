@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(GameObject player, int hits)
     {
         int i = Players.IndexOf(player);
-        pms.updateScoreborad(CurrentHole, hits, i);
+        pms.updateScoreborad(player.GetComponent<PlayerControls>().Hole, hits, i);
     }
 
     public void ToHole(GameObject player, int holeIndex)
