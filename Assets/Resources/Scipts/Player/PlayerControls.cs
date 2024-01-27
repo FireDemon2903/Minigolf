@@ -4,18 +4,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    public GameManager gameManager;
+    public GameManager gameManager;                         // GM ref
 
-    GravitySource[] gravitySources;
+    GravitySphere[] gravitySources;                         // List of gravity scources to check in final level
 
-    public int Hits = 0;
-    public int Hole = 0;
+    public int Hits = 0;                                    // Hits on current hole
+    public int Hole = 0;                                    // Current hole
 
     Rigidbody targetRB;
     Vector3 TargetVelocity => targetRB.velocity;
-    bool IsMoving => TargetVelocity.magnitude > 5;        // True if target vel is not zero
+    bool IsMoving => TargetVelocity.magnitude > 5;          // True if target vel is not zero
 
-    Vector3 LastPos;
+    Vector3 LastPos;                                        // Last position where IsMoving was false
 
     // True is lmb is held down
     bool LMBPressed = true;
@@ -23,6 +23,7 @@ public class PlayerControls : MonoBehaviour
     // true after force has been added, toggles affter coroutine to change player was started
     bool fired = false;
 
+    // Used to calc LastPos
     Vector2 StartPress = Vector2.zero;
     Vector2 EndPress = Vector2.zero;
 
@@ -31,10 +32,11 @@ public class PlayerControls : MonoBehaviour
     {
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
-        gravitySources = FindObjectsOfType<GravitySource>();
-        targetRB.useGravity = false; Hole = 6;
+        gravitySources = FindObjectsOfType<GravitySphere>();
+        targetRB.useGravity = false; Hole = 6;      // For debugging last level
     }
 
+    // Custom gravity for final level
     private void FixedUpdate()
     {
         Vector3 gravity = Vector3.zero;
@@ -50,11 +52,13 @@ public class PlayerControls : MonoBehaviour
     {
         if (!IsMoving)
         {
+            // Calc last position
             LastPos = LastPos == targetRB.gameObject.transform.position ? LastPos : targetRB.gameObject.transform.position;
         }
 
         if (fired && IsMoving)
         {
+            // Player fired, stop listening
             fired = false;
             StartCoroutine(WaitForMove());
         }
@@ -96,13 +100,14 @@ public class PlayerControls : MonoBehaviour
             // Add the force
             if (Hole != 6)
             {
-                // Find horizontal direction and normalize
+                // Find horizontal direction and normalize.
                 Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
                 
                 targetRB.AddForce(new Vector3(horizontalDirection.x, 0, horizontalDirection.y) * force, ForceMode.Impulse);
             }
             else
             {
+                // Here the direction is not horizontal only, as it is planet level
                 targetRB.AddForce(direction.normalized * force * 2, ForceMode.Impulse);
             }
 
@@ -124,14 +129,18 @@ public class PlayerControls : MonoBehaviour
         else
         {
             EndPress = Mouse.current.position.ReadValue();
+
+            // the total distence mouse moved when lmb was held
             Vector2 total = EndPress - StartPress;
 
             // To make sure thee ae no missclicks
-            if (total.magnitude > 50) { AddVel(total.magnitude); } else { LMBPressed = !LMBPressed; }
+            if (total.magnitude > 50) { AddVel(total.magnitude); }
+            else { LMBPressed = !LMBPressed; }
         }
         LMBPressed = !LMBPressed;
     }
 
+    // For debugging (button is 'e')
     void OnFire2()
     {
         targetRB.velocity = Vector3.zero;
@@ -141,12 +150,15 @@ public class PlayerControls : MonoBehaviour
     // Resets to last pos where ball was not moveing (then changes player (unintuitive, but oh well))
     void OnReset()
     {
+        Hits++;
         OnFire2();
         transform.position = LastPos;
     }
 
+    // Back to start of hole
     void OnHardReset()
     {
+        Hits++;
         gameManager.ToHole(gameObject, Hole);
     }
 

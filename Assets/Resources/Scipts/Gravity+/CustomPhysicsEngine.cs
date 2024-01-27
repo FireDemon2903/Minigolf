@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// As of yet unused
+/// </summary>
 public class CustomPhysicsEngine : MonoBehaviour
 {
     public static List<GravitySource> sources = new();
