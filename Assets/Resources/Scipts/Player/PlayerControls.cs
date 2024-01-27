@@ -32,7 +32,7 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySource>();
-        //targetRB.useGravity = false; Hole = 5;
+        targetRB.useGravity = false; Hole = 6;
     }
 
     private void FixedUpdate()
@@ -94,7 +94,7 @@ public class PlayerControls : MonoBehaviour
             force *= gameManager.Scaling[Hole].x * .2f;
 
             // Add the force
-            if (Hole != 5)
+            if (Hole != 6)
             {
                 // Find horizontal direction and normalize
                 Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;
@@ -103,7 +103,7 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                targetRB.AddForce(direction.normalized * force, ForceMode.Impulse);
+                targetRB.AddForce(direction.normalized * force * 2, ForceMode.Impulse);
             }
 
             fired = true;
