@@ -65,6 +65,7 @@ public class PlayerControls : MonoBehaviour
         if (other.gameObject.CompareTag("Hole"))
         {
             Hole++;
+            Hits = 0;
             gameManager.ToHole(gameObject, Hole);
         }
         else if (other.gameObject.CompareTag("Finish"))

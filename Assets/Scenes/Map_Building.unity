@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07466497, g: 0.026069012, b: 0.008353772, a: 1}
+  m_IndirectSpecularColor: {r: 0.074664876, g: 0.026068993, b: 0.008353772, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -66230,9 +66230,10 @@ GameObject:
   - component: {fileID: 433437893569658173}
   - component: {fileID: 5805462382279208093}
   - component: {fileID: 7023753530959195968}
+  - component: {fileID: 7023753530959195969}
   m_Layer: 0
   m_Name: Pot_01
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66288,9 +66289,10 @@ GameObject:
   - component: {fileID: 433437893063174977}
   - component: {fileID: 5805462382385167073}
   - component: {fileID: 7023753530593196348}
+  - component: {fileID: 7023753530593196349}
   m_Layer: 0
   m_Name: Pot_01
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66308,9 +66310,10 @@ GameObject:
   - component: {fileID: 5805462382384615835}
   - component: {fileID: 7023753530594775622}
   - component: {fileID: 7023753530594775623}
+  - component: {fileID: 7023753530594775624}
   m_Layer: 0
   m_Name: Pot_01 (12)
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66387,9 +66390,10 @@ GameObject:
   - component: {fileID: 433437894200977515}
   - component: {fileID: 5805462383522904523}
   - component: {fileID: 7023753529451133462}
+  - component: {fileID: 7023753529451133463}
   m_Layer: 0
   m_Name: Pot_01
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66426,9 +66430,10 @@ GameObject:
   - component: {fileID: 433437893910260546}
   - component: {fileID: 5805462382611954402}
   - component: {fileID: 7023753529276283199}
+  - component: {fileID: 7023753529276283200}
   m_Layer: 0
   m_Name: Pot_01
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78603,6 +78608,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ea68aa111adc3264f9968657e12cc86a, type: 3}
+--- !u!65 &7023753529276283200
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508803079942713826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6205748, y: 0.27691936, z: 0.5857351}
+  m_Center: {x: 0.020631522, y: 0.5482886, z: 0.0067242384}
 --- !u!64 &7023753529448196241
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78645,6 +78663,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ea68aa111adc3264f9968657e12cc86a, type: 3}
+--- !u!65 &7023753529451133463
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508803079581217483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6205748, y: 0.27691936, z: 0.5857351}
+  m_Center: {x: 0.020631522, y: 0.5482886, z: 0.0067242384}
 --- !u!64 &7023753529534328121
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78743,6 +78774,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ea68aa111adc3264f9968657e12cc86a, type: 3}
+--- !u!65 &7023753530593196349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508803078575862241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6205748, y: 0.27691936, z: 0.5857351}
+  m_Center: {x: 0.020631522, y: 0.5482886, z: 0.0067242384}
 --- !u!64 &7023753530594775622
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78771,6 +78815,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ea68aa111adc3264f9968657e12cc86a, type: 3}
+--- !u!65 &7023753530594775624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508803078576396955}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2292898, y: 1.5346626, z: 3.3277519}
+  m_Center: {x: 0.4806281, y: 0.7658396, z: -1.0298566}
 --- !u!64 &7023753530608158185
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -78827,6 +78884,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ea68aa111adc3264f9968657e12cc86a, type: 3}
+--- !u!65 &7023753530959195969
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508803078404925341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6205748, y: 0.31229725, z: 0.5857351}
+  m_Center: {x: 0.020631528, y: 0.56597775, z: 0.0067242384}
 --- !u!4 &7050470154643102647
 Transform:
   m_ObjectHideFlags: 0

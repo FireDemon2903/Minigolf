@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using System.ComponentModel;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,19 +16,19 @@ public class GameManager : MonoBehaviour
 
     public readonly List<Vector3> Scaling = new()
     {
-        new Vector3(.1f, .1f, .1f) * 2,
+        new Vector3(.2f, .2f, .2f),
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
         Vector3.one,
         Vector3.one,
-        Vector3.one
+        new Vector3(.5f, .5f, .5f)
     };
     readonly List<Color> colors = new()
     {
         Color.red,
         Color.green,
         Color.blue,
-        new Color(218,165,32)
+        Color.yellow  //new Color(218,165,32)  // Golden
     };
 
     private void Start()
@@ -41,11 +40,12 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < pms.playerNumbers; i++)
         {
-            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0].position, Quaternion.identity);
+            GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0].position + new Vector3(.5f * i, 0, 0), Quaternion.identity);
             temp.GetComponent<PlayerControls>().gameManager = this;
             cameraControl.targets.Add(temp.transform);
             Players.Add(temp);
             temp.GetComponent<Renderer>().material.color = colors[i];
+            temp.GetComponent<Light>().color = colors[i];
             ScaleAll(temp, 0);
         }
         Camera.main.SendMessage("Begin");
@@ -80,8 +80,8 @@ public class GameManager : MonoBehaviour
     public void ToHole(GameObject player, int holeIndex)
     {
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;           // Reset vel
-        if (holeIndex == 5) { ToggleBuiltinGravity(player); }               // If the player reaches last level (planets)
-        //ScaleAll(player, holeIndex);                                        // Scale
+        if (holeIndex == 5) { ToggleBuiltinGravity(player); print("toggle"); }               // If the player reaches last level (planets)
+        ScaleAll(player, holeIndex);                                        // Scale
         player.transform.position = StartingPositions[holeIndex].position;  // set pos
     }
     
