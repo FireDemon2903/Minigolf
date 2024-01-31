@@ -33,7 +33,7 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySphere>();
-        targetRB.useGravity = false; Hole = 6;      // For debugging last level
+        //targetRB.useGravity = false; Hole = 6;      // For debugging last level
     }
 
     // Custom gravity for final level
@@ -74,6 +74,7 @@ public class PlayerControls : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Finish"))
         {
+            print(gameObject.name);
             gameManager.PlayerWon(gameObject);
         }
         else if (other.CompareTag("Saturn"))
@@ -98,7 +99,7 @@ public class PlayerControls : MonoBehaviour
             force *= gameManager.Scaling[Hole].x * .2f;
 
             // Add the force
-            if (Hole != 6)
+            if (Hole != 5)
             {
                 // Find horizontal direction and normalize.
                 Vector2 horizontalDirection = new Vector2(direction.x, direction.z).normalized;

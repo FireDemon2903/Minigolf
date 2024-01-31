@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void ToHole(GameObject player, int holeIndex)
     {
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;                               // Reset vel
-        if (holeIndex == 6) { ToggleBuiltinGravity(player); print("toggle"); }                  // If the player reaches last level (planets)
+        if (holeIndex == 5) { ToggleBuiltinGravity(player); print("toggle"); }                  // If the player reaches last level (planets)
         ScaleAll(player, holeIndex);                                                            // Scale
         player.transform.position = StartingPositions[holeIndex].position;                      // Set pos
     }

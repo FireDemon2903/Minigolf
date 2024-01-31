@@ -2978,7 +2978,7 @@ MonoBehaviour:
   is_paused: 0
   holesPassed: 0
   playerNumbers: 2
-  numberOfHoles: 8
+  numberOfHoles: 6
   holePoints: 
   ThePrefrabOfTheHolesYeah: {fileID: 5431716896833473692, guid: 79ad60b4464d3bd44a1c44ea697f329d, type: 3}
   TheParentOfAllParents: {fileID: 7427766906727924840}
