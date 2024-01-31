@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         cameraControl = Camera.main.GetComponent<CameraControl>();
         pms = EventSystem.GetComponent<PauseMenuScriptHvisNavnetErTagetErJegFucked>();
 
-        for (int i = 0; i < pms.playerNumbers; i++)
+        for (int i = 0; i < pms.smsDims.gert; i++)
         {
             GameObject temp = Instantiate(PlayerPrefab, StartingPositions[0].position + new Vector3(.5f * i, 0, 0), Quaternion.identity);
             temp.GetComponent<PlayerControls>().gameManager = this;
