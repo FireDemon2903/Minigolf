@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PauseMenuScriptHvisNavnetErTagetErJegFucked : MonoBehaviour
 {
-    // :)
     public GameObject pauseMenuen;
     public GameObject vicMenuen;
     public GameObject scoreborad;
