@@ -1,7 +1,6 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour
 {
