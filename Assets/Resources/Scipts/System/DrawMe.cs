@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
+/// <summary>
+/// Class for drawing circles around gameobjects in the editor.
+/// </summary>
 public class DrawMe : MonoBehaviour
 {
     [SerializeField, ColorUsage(true, order = 1)] Color m_Color = Color.white;

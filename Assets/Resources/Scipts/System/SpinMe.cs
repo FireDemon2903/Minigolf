@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// For spinning something
 public class SpinMe : MonoBehaviour
 {
     // Update is called once per frame
