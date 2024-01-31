@@ -7,6 +7,9 @@ TagManager:
   - Hole
   - Startpoint
   - Saturn
+  - Wood
+  - Gravel
+  - Fence
   layers:
   - Default
   - TransparentFX

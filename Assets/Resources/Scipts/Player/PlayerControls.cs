@@ -23,6 +23,13 @@ public class PlayerControls : MonoBehaviour
     // true after force has been added, toggles affter coroutine to change player was started
     bool fired = false;
 
+    // Audio
+    AudioSource AS;
+    AudioClip GolfHit;
+    AudioClip Gravel;
+    AudioClip Fence;
+    AudioClip Wood;
+
     // Used to calc LastPos
     Vector2 StartPress = Vector2.zero;
     Vector2 EndPress = Vector2.zero;
@@ -33,6 +40,17 @@ public class PlayerControls : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
         targetRB = GetComponent<Rigidbody>();
         gravitySources = FindObjectsOfType<GravitySphere>();
+
+        AS = GetComponent<AudioSource>();
+
+        GolfHit = Resources.Load<AudioClip>(@"Sound/GolfSmack");
+        Gravel = Resources.Load<AudioClip>(@"Sound/GravelRoll");
+        Fence = Resources.Load<AudioClip>(@"Sound/HitFence");
+        Wood = Resources.Load<AudioClip>(@"Sound/WoodSmack");
+
+        AS.clip = Wood;
+        AS.Play();
+
         //targetRB.useGravity = false; Hole = 6;      // For debugging last level
     }
 
@@ -80,6 +98,22 @@ public class PlayerControls : MonoBehaviour
         else if (other.CompareTag("Saturn"))
         {
             gameManager.ToHole(gameObject, Hole);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Gravel":
+                AS.clip = Gravel; AS.Play();
+                break;
+            case "Fence":
+                AS.clip = Fence; AS.Play();
+                break;
+            case "Wood":
+                AS.clip = Wood; AS.Play();
+                break;
         }
     }
 
@@ -135,7 +169,7 @@ public class PlayerControls : MonoBehaviour
             Vector2 total = EndPress - StartPress;
 
             // To make sure thee ae no missclicks
-            if (total.magnitude > 50) { AddVel(total.magnitude); }
+            if (total.magnitude > 50) { AddVel(total.magnitude); AS.clip = GolfHit; AS.Play(); }
             else { LMBPressed = !LMBPressed; }
         }
         LMBPressed = !LMBPressed;

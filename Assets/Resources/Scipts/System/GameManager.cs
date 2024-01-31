@@ -20,8 +20,7 @@ public class GameManager : MonoBehaviour
         Vector3.one,
         new Vector3(.5f, .5f, .5f),
         Vector3.one,
-        Vector3.one,
-        new Vector3(.5f, .5f, .5f),
+        new Vector3(.5f, .5f, .5f),/////
         Vector3.one
     };
     // Player colours
